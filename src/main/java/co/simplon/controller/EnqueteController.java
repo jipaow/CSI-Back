@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
+import co.simplon.model.DataEnquete;
 import co.simplon.model.Enquete;
 import co.simplon.model.Suspect;
 import co.simplon.service.EnqueteService;
@@ -26,14 +28,14 @@ public class EnqueteController {
 	
 	@RequestMapping(value = "/enquetes", method = RequestMethod.GET)
 	public ResponseEntity <?> getAllEnquete(){
-		List <Enquete> listEnquete = null;
+		DataEnquete dataEnquete = null;
 		try {
-			listEnquete= enqueteService.getAllEnquete();
+			dataEnquete= enqueteService.getAllEnquete();
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
 		}
 		
-		return ResponseEntity.status(HttpStatus.OK).body(listEnquete);
+		return ResponseEntity.status(HttpStatus.OK).body(dataEnquete);
 	}
 	
 	@RequestMapping(value ="/enquete/{id}" , method = RequestMethod.GET)

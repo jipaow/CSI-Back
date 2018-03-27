@@ -1,11 +1,13 @@
 package co.simplon.dao;
 
 import java.util.List;
+
+import co.simplon.model.DataSuspect;
 import co.simplon.model.Suspect;
 
 public interface SuspectDAO {
 	
-	public List<Suspect> listSuspect () throws Exception;
+	public DataSuspect listSuspect() throws Exception;
 	
 	public Suspect  getSuspect(int id) throws Exception;
 	

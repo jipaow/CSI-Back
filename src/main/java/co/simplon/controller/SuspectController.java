@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
+import co.simplon.model.DataSuspect;
 import co.simplon.model.Suspect;
 import co.simplon.service.SuspectService;
 
@@ -28,14 +30,14 @@ public class SuspectController {
 	    
 		@RequestMapping(value = "/suspects", method = RequestMethod.GET)
 		public ResponseEntity <?> getAllSuspect(){
-			List <Suspect> listSuspect = null;
+			DataSuspect dataSuspect = null;
 			try {
-				listSuspect= suspectService.getAllSuspect();
+				dataSuspect= suspectService.getAllSuspect();
 			} catch (Exception e) {
 				return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
 			}
 			
-			return ResponseEntity.status(HttpStatus.OK).body(listSuspect);
+			return ResponseEntity.status(HttpStatus.OK).body(dataSuspect);
 		}
 		
 		

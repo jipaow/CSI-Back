@@ -11,6 +11,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
+
+import co.simplon.model.DataSuspect;
 import co.simplon.model.Suspect;
 
 @Repository
@@ -25,12 +27,12 @@ public class jdbcSuspectDAO implements SuspectDAO {
 	}
 
 	@Override
-	public List<Suspect> listSuspect() throws Exception {
+	public DataSuspect listSuspect() throws Exception {
 		Suspect suspect;
 		PreparedStatement pstmt = null;
 		ResultSet rs;
 		String sql;
-		ArrayList <Suspect> listSuspect = new ArrayList<Suspect>();
+		DataSuspect dataSuspect = new DataSuspect();
 		
 		try {
 			// Prepare la requete sql
@@ -46,7 +48,7 @@ public class jdbcSuspectDAO implements SuspectDAO {
 			// gere le resultat de la requete
 			while (rs.next()) {
 				suspect = getSuspectFromResultSet(rs);
-				listSuspect.add(suspect);
+				dataSuspect.getData().add(suspect);
 			}
 				
 		} catch (Exception e) {
@@ -57,7 +59,7 @@ public class jdbcSuspectDAO implements SuspectDAO {
 			pstmt.close();
 		}
 		
-		return listSuspect;
+		return dataSuspect;
 	}
 
 	@Override

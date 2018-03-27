@@ -11,6 +11,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
+
+import co.simplon.model.DataEnquete;
 import co.simplon.model.Enquete;
 import co.simplon.model.Suspect;
 
@@ -26,12 +28,12 @@ public class jdbcEnqueteDAO implements EnqueteDAO {
 	}
 
 	@Override
-	public List<Enquete> listEnquete() throws Exception {
+	public DataEnquete listEnquete() throws Exception {
 		Enquete enquete;
 		PreparedStatement pstmt = null;
 		ResultSet rs;
 		String sql;
-		ArrayList <Enquete> listEnquete = new ArrayList<Enquete>();
+		DataEnquete dataEnquete = new DataEnquete();
 		
 		try {
 			// Prepare la requete sql
@@ -47,7 +49,7 @@ public class jdbcEnqueteDAO implements EnqueteDAO {
 			// gere le resultat de la requete
 			while (rs.next()) {
 				enquete = getEnqueteFromResultSet(rs);
-				listEnquete.add(enquete);
+				dataEnquete.getData().add(enquete);
 			}
 				
 		} catch (Exception e) {
@@ -58,7 +60,7 @@ public class jdbcEnqueteDAO implements EnqueteDAO {
 			pstmt.close();
 		}
 	
-		return listEnquete;
+		return dataEnquete;
 	}
 
 

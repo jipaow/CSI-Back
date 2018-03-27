@@ -6,9 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import co.simplon.dao.SuspectDAO;
+import co.simplon.model.DataSuspect;
 import co.simplon.model.Enquete;
 import co.simplon.model.Suspect;
-import co.simplon.model.SuspectEnquete;
+
 
 
 @Service
@@ -18,7 +19,7 @@ public class SuspectService {
 	private SuspectDAO dao;
 	
 	// Retrieve all rows from table and populate list with objects
-	public List<Suspect> getAllSuspect() throws Exception {
+	public DataSuspect getAllSuspect() throws Exception {
 		return dao.listSuspect();
 	}
 	
