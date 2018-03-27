@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import co.simplon.dao.EnqueteDAO;
 import co.simplon.model.Enquete;
+import co.simplon.model.Suspect;
 
 
 @Service
@@ -34,5 +35,19 @@ public class EnqueteService {
 		return dao.updateEnquete(enquete);
 	}
 	
-
+	public Enquete addSuspectToEnquete (Enquete enquete) throws Exception {
+		return dao.addSuspectToEnquete(enquete);
+	}
+	
+	public Enquete archiverEnquete (Enquete enquete) throws Exception {
+		return dao.archiverEnquete(enquete);
+	}
+	
+	public void supprimerJointureEnquete (int id) throws Exception {
+		dao.supprimerJointureEnquete(id);
+	}
+	
+	public void supprimerEnquete (int id) throws Exception {
+		dao.supprimerEnquete(id);
+	}
 }

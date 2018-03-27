@@ -130,17 +130,7 @@ public class jdbcSuspectDAO implements SuspectDAO {
 			
 			// Run the the update query	
 			pstmt.executeUpdate();
-			System.out.println("LA BOULE D'OR");
-			
-			// TODO 
-			// recupération de l'id genere, et maj de l'acteur avec l'id et la date de modif
-//			ResultSet rs = pstmt.getGeneratedKeys();
-//			if (rs.next()) {
-//				suspect.setId(rs.getLong(1));
-//				suspect.setLastUpdate(updateTime);
-//				
-//				result = suspect;
-//			}
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 			log.error("SQL Error !:" + pstmt.toString(), e);
@@ -170,7 +160,6 @@ public class jdbcSuspectDAO implements SuspectDAO {
 		    logSQL(pstmt);
 		    
 		    pstmt.executeUpdate();
-			System.out.println("LA SUPER BOULE D'OR");
 						
 		} catch (SQLException e) {
 			e.printStackTrace();

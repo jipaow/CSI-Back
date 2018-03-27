@@ -5,15 +5,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.sql.DataSource;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
-
 import co.simplon.model.Enquete;
 import co.simplon.model.Suspect;
 
@@ -28,8 +25,6 @@ public class jdbcEnqueteDAO implements EnqueteDAO {
 		this.datasource = jdbcTemplate.getDataSource();
 	}
 
-	
-	
 	@Override
 	public List<Enquete> listEnquete() throws Exception {
 		Enquete enquete;
@@ -134,7 +129,101 @@ public class jdbcEnqueteDAO implements EnqueteDAO {
 		return result;
 		
 	}
+	 /**
+	  * 
+	  */
+	@Override
+	public Enquete archiverEnquete(Enquete enquete) throws Exception {
+		PreparedStatement pstmt = null;
+		Enquete result = null;
+		int i = 0;
+		
+		try {
+		String sql = "INSERT INTO enquete_old (enquete_id_archive, nom_enquete_archive, type_affaire_archive, date_creation_archive, localisation_archive, statut_archive, classee)" 
+						+ "VALUES ((select id_enquete from enquete where id_enquete = ?),"
+								+ "(select nom_enquete from enquete where  id_enquete = ?),"
+								+ "(select type_affaire from enquete where id_enquete = ?),"
+								+ "(select date_creation from enquete where id_enquete = ?),"
+								+ "(select localisation from enquete where id_enquete = ?),"
+								+ "(select statut from enquete where id_enquete = ?),"
+								+ "(select classee from enquete where id_enquete = ?))";
+		
+		pstmt = datasource.getConnection().prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
+		
+		pstmt.setInt(++i, enquete.getNumeroDossier());
+		pstmt.setInt(++i, enquete.getNumeroDossier());
+		pstmt.setInt(++i, enquete.getNumeroDossier());
+		pstmt.setInt(++i, enquete.getNumeroDossier());
+		pstmt.setInt(++i, enquete.getNumeroDossier());
+		pstmt.setInt(++i, enquete.getNumeroDossier());
+		pstmt.setInt(++i, enquete.getNumeroDossier());
+		
+		logSQL(pstmt);
+		
+		pstmt.executeUpdate();
+	} catch (SQLException e) {
+		e.printStackTrace();
+		log.error("SQL Error !:" + pstmt.toString(), e);
+		throw e;
+	} finally {
+		pstmt.close();
+	}
+	
+	return result;
+	}
 
+	@Override 
+	public void supprimerJointureEnquete(int id) throws Exception {
+		
+		PreparedStatement pstmt = null;
+		try {
+			String sql = "DELETE FROM personne_impliquee where enquete_id = ?";
+			pstmt = datasource.getConnection().prepareStatement(sql);
+			pstmt.setInt(1, id);
+			
+			logSQL(pstmt);
+			
+			// Run the the update query
+			pstmt.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			log.error("SQL Error !:" + pstmt.toString(), e);
+			throw e;
+		} finally {
+			pstmt.close();
+		}
+			
+		}
+	
+
+	@Override 
+	public void supprimerEnquete(int id) throws Exception {
+		
+		PreparedStatement pstmt = null;
+		try {
+			String sql = "DELETE FROM enquete where id_enquete = ?";
+			pstmt = datasource.getConnection().prepareStatement(sql);
+			pstmt.setInt(1, id);
+			
+			logSQL(pstmt);
+			
+			// Run the the update query
+			int result = pstmt.executeUpdate();
+			if(result != 1)
+				throw new Exception("Enquête non trouvé");
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			log.error("SQL Error !:" + pstmt.toString(), e);
+			throw e;
+		} finally {
+			
+			pstmt.close();
+		}
+			
+		}
+	
 	@Override
 	public Enquete updateEnquete(Enquete enquete) throws Exception {
 		Enquete result = null;
@@ -147,19 +236,19 @@ public class jdbcEnqueteDAO implements EnqueteDAO {
             pstmt = datasource.getConnection().prepareStatement(sql);
 
             pstmt.setString(++i, enquete.getNom());
-            System.out.println(enquete.getNom());
+            
             pstmt.setString(++i, enquete.getCategorie());
-            System.out.println(enquete.getCategorie());
+            
             pstmt.setDate(++i, enquete.getDateCreation());
-            System.out.println(enquete.getDateCreation());
+            
             pstmt.setString(++i, enquete.getLocalisation());
-            System.out.println(enquete.getLocalisation());
+            
             pstmt.setString(++i, enquete.getStatut());
-            System.out.println(enquete.getStatut());
+           
             pstmt.setBoolean(++i, enquete.isClassee());
-            System.out.println(enquete.isClassee());
+
             pstmt.setInt(++i,  enquete.getNumeroDossier());
-            System.out.println(enquete.getNumeroDossier());
+         
 			// Log info
 			logSQL(pstmt);
 			
@@ -191,6 +280,36 @@ public class jdbcEnqueteDAO implements EnqueteDAO {
 		log.debug(sql);
 		
 	}
+	
+	@Override
+	public Enquete addSuspectToEnquete (Enquete enquete) throws Exception{
+		PreparedStatement pstmt = null;
+		Enquete result = null;
+		int i = 0;
+		
+		try {
+			String sql = "INSERT INTO personne_impliquee (humain_id, enquete_id,status_id) VALUES ((select id_humain from humain order by id_humain desc limit 1), ?, 2 )";
+			pstmt = datasource.getConnection().prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
+
+			pstmt.setInt(++i, enquete.getNumeroDossier());
+			
+			// Log info
+		    logSQL(pstmt);
+		    
+		    pstmt.executeUpdate();
+			System.out.println("LA SUPER BOULE D'OR");
+						
+		} catch (SQLException e) {
+			e.printStackTrace();
+			log.error("SQL Error !:" + pstmt.toString(), e);
+			throw e;
+		} finally {
+			pstmt.close();
+		}
+		
+		return result;
+	}
+	
 
 	private Enquete getEnqueteFromResultSet(ResultSet rs) throws SQLException {
 		Enquete enquete = new Enquete();

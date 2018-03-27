@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import co.simplon.model.Enquete;
+import co.simplon.model.Suspect;
 import co.simplon.service.EnqueteService;
 
 @CrossOrigin(origins="http://localhost:4200")
@@ -75,6 +76,18 @@ public class EnqueteController {
 		return ResponseEntity.status(HttpStatus.CREATED).body(resultEnquete);
 	}
 	
+	@RequestMapping(value="/archiver", method = RequestMethod.POST)
+	public ResponseEntity<?> archiverEnquete(@RequestBody Enquete enquete){
+		Enquete resultEnquete = null;
+		
+		try {
+			resultEnquete = enqueteService.archiverEnquete(enquete);
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+		}
+		return ResponseEntity.status(HttpStatus.CREATED).body(resultEnquete);
+	}
+	
 	@RequestMapping(value ="/enquete/{id}", method = RequestMethod.PUT)
 	public ResponseEntity<?> updateEnquete(@RequestBody Enquete enquete,@PathVariable int id) throws Exception{
 		
@@ -91,6 +104,45 @@ public class EnqueteController {
 		
 	}
 	
+	@RequestMapping(value="supprimerJointure/{id}", method = RequestMethod.DELETE)
+	public ResponseEntity<?> supprimerJointureEnquete(@PathVariable int id){
+		
+		try {
+			enqueteService.supprimerJointureEnquete(id);
+		 } catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+		}
+
+		return ResponseEntity.status(HttpStatus.OK).body(null);
+	}
 	
+	@RequestMapping(value="supprimer/{id}", method = RequestMethod.DELETE)
+	public ResponseEntity<?> supprimerEnquete(@PathVariable int id){
+		
+		try {
+			System.out.println("test");
+			enqueteService.supprimerEnquete(id);
+			System.out.println("test ok");
+			
+		 } catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+		}
+		
+		return ResponseEntity.status(HttpStatus.OK).body(null);
+	}
+	
+	@RequestMapping(value = "/suspect/link", method = RequestMethod.POST)
+    public ResponseEntity<?> addSuspectToEnquete(@RequestBody Enquete enquete){
+        Enquete resultEnquete = null;
+       
+       try {
+            resultEnquete = enqueteService.addSuspectToEnquete(enquete);
+            
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+        }
+        return ResponseEntity.status(HttpStatus.CREATED).body(resultEnquete);
+        
+    }
 	
 }

@@ -111,19 +111,19 @@ public class SuspectController {
 			
 		}
 		
-		@RequestMapping(value = "/suspect/link", method = RequestMethod.POST)
-        public ResponseEntity<?> addSuspectToEnquete(@RequestBody Suspect suspect){
-            Suspect resultSuspect = null;
-           
-           try {
-                resultSuspect = suspectService.addSuspectToEnquete(suspect);
-                
-            } catch (Exception e) {
-                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
-            }
-            return ResponseEntity.status(HttpStatus.CREATED).body(resultSuspect);
-            
-        }
+//		@RequestMapping(value = "/suspect/link", method = RequestMethod.POST)
+//        public ResponseEntity<?> addSuspectToEnquete(@RequestBody Suspect suspect){
+//            Suspect resultSuspect = null;
+//           
+//           try {
+//                resultSuspect = suspectService.addSuspectToEnquete(suspect);
+//                
+//            } catch (Exception e) {
+//                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+//            }
+//            return ResponseEntity.status(HttpStatus.CREATED).body(resultSuspect);
+//            
+//        }
 		
 	
 	
