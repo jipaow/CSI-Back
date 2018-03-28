@@ -23,7 +23,7 @@ public class EnqueteService {
 	}
 	
 	// Retrieves one row from table based on given id
-	public Enquete getEnquete(int id) throws Exception {
+	public DataEnquete getEnquete(int id) throws Exception {
 		return dao.getEnquete(id);
 	}
 	

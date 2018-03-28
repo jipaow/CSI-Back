@@ -65,35 +65,39 @@ public class jdbcEnqueteDAO implements EnqueteDAO {
 
 
 	@Override
-	public Enquete getEnquete(int numeroDossier) throws Exception {
-		
+	public DataEnquete getEnquete(int numeroDossier) throws Exception {
+		Enquete enquete;
 		PreparedStatement pstmt = null;
 		ResultSet rs;
-		Enquete enquete = null;
-
+		String sql;
+		DataEnquete dataEnquete = new DataEnquete();
+		
 		try {
-			// Prepare requet sql
-			String sql = "SELECT * FROM enquete WHERE id_enquete = ?";
+			// Prepare la requete sql
+			sql = "SELECT * FROM enquete WHERE id_enquete = ?";
 			pstmt = datasource.getConnection().prepareStatement(sql);
 			pstmt.setInt(1, numeroDossier);
-
+			// Run la requete
+			rs = pstmt.executeQuery();
+			
 			// Log info
 			logSQL(pstmt);
 
-			// Run requete
-			rs = pstmt.executeQuery();
-			
-			// gere les resultats de requete
-			if (rs.next())
+			// gere le resultat de la requete
+			while (rs.next()) {
 				enquete = getEnqueteFromResultSet(rs);
-		} catch (SQLException e) {
+				dataEnquete.getData().add(enquete);
+			}
+				
+		} catch (Exception e) {
 			e.printStackTrace();
 			log.error("SQL Error !:" + pstmt.toString(), e);
 			throw e;
 		} finally {
 			pstmt.close();
 		}
-		return enquete;
+	
+		return dataEnquete;
 	}
 
 	@Override

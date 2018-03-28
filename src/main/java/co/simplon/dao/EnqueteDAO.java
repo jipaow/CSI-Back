@@ -10,7 +10,7 @@ public interface EnqueteDAO {
 	
 	public DataEnquete listEnquete() throws Exception;
 	
-	public Enquete getEnquete(int numeroDossier) throws Exception;
+	public DataEnquete getEnquete(int numeroDossier) throws Exception;
 	
 	public Enquete insertEnquete(Enquete enquete) throws Exception;
 	

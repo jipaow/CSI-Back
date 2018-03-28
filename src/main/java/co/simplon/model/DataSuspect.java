@@ -8,6 +8,7 @@ public class DataSuspect {
 	private List <Suspect> data = new ArrayList<>();
 	
 	
+	
 	public DataSuspect() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -29,6 +30,7 @@ public class DataSuspect {
 	public void setData(List<Suspect> data) {
 		this.data = data;
 	}
+
 	
 
 	

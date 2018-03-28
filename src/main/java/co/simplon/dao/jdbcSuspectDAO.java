@@ -3,8 +3,6 @@ package co.simplon.dao;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 import javax.sql.DataSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -36,7 +34,7 @@ public class jdbcSuspectDAO implements SuspectDAO {
 		
 		try {
 			// Prepare la requete sql
-			sql = "SELECT * FROM humain INNER JOIN personne_impliquee ON personne_impliquee.humain_id = humain.id_humain WHERE personne_impliquee.status_id = 2";
+			sql = "SELECT DISTINCT * FROM humain INNER JOIN personne_impliquee ON personne_impliquee.humain_id = humain.id_humain WHERE personne_impliquee.status_id = 2 GROUP BY id_humain";
 			pstmt = datasource.getConnection().prepareStatement(sql);
 			
 			// Run la requete
@@ -63,36 +61,43 @@ public class jdbcSuspectDAO implements SuspectDAO {
 	}
 
 	@Override
-	public Suspect getSuspect(int id) throws Exception {
+	public DataSuspect getSuspect(int id) throws Exception {
+		Suspect suspect;
 		PreparedStatement pstmt = null;
 		ResultSet rs;
-		Suspect suspect = null;
-
+		String sql;
+		DataSuspect dataSuspect = new DataSuspect();
+		
 		try {
-			// Prepare requet sql
-			String sql = "SELECT * FROM humain INNER JOIN personne_impliquee ON personne_impliquee.humain_id = humain.id_humain WHERE personne_impliquee.status_id = 2 AND humain.id_humain = ?";
+			// Prepare la requete sql
+			sql = "SELECT DISTINCT * FROM humain INNER JOIN personne_impliquee ON personne_impliquee.humain_id = humain.id_humain WHERE personne_impliquee.status_id = 2 AND humain.id_humain = ? GROUP BY id_humain";
 			pstmt = datasource.getConnection().prepareStatement(sql);
 			pstmt.setInt(1, id);
-
+			
+			// Run la requete
+			rs = pstmt.executeQuery();
+			
 			// Log info
 			logSQL(pstmt);
 
-			// Run requete
-			rs = pstmt.executeQuery();
-			
-			// gere les resultats de requete
-			if (rs.next())
+			// gere le resultat de la requete
+			while (rs.next()) {
 				suspect = getSuspectFromResultSet(rs);
-		} catch (SQLException e) {
+				dataSuspect.getData().add(suspect);
+			}
+				
+		} catch (Exception e) {
 			e.printStackTrace();
 			log.error("SQL Error !:" + pstmt.toString(), e);
 			throw e;
 		} finally {
 			pstmt.close();
 		}
-		return suspect;
-	
+		
+		return dataSuspect;
 	}
+	
+	
 
 	@Override
 	public Suspect insertSuspect(Suspect suspect) throws Exception {
@@ -101,15 +106,10 @@ public class jdbcSuspectDAO implements SuspectDAO {
 		Suspect result = null;
 		int i = 0;
 		
-		// TODO
-		// force auto incremente en initialisant à 0, sinon erreur sql si id
-		// existant
-		//suspect.setId(new int(0));
-
 		try {
 			// Prepare the SQL query
 			String sql1 = "INSERT INTO humain ( nom, prenom, genre, date_naissance, nationalite, taille, poids, adresse, signe_distinctif,photo, empreinte, casier,nombre_condamnation, type_condamnation ) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-//		 "INSERT INTO personne_impliquee (humain_id, enquete_id,status_id) VALUES ((SELECT id_humain from humain WHERE nom=?), ?,2 )";
+
 			pstmt = datasource.getConnection().prepareStatement(sql1, PreparedStatement.RETURN_GENERATED_KEYS);
 			pstmt.setString(++i, suspect.getNom());
 			pstmt.setString(++i, suspect.getPrenom());

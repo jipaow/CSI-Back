@@ -8,16 +8,16 @@ public class Agent extends Humain {
 	private String competences;
 	private String statutActivite;
 	private Date anciennete;
+	private String telephone;
+	private int numEnquete;
 	
 
 	public Agent() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Agent(int id, String nom, String prenom, Date dateNaissance, String genre) {
-		super(id, nom, prenom, dateNaissance, genre);
-		// TODO Auto-generated constructor stub
-	}
+	
+
 	public String getGrade() {
 		return grade;
 	}
@@ -42,6 +42,23 @@ public class Agent extends Humain {
 	public void setAnciennete(Date anciennete) {
 		this.anciennete = anciennete;
 	}
+	public String getTelephone() {
+		return telephone;
+	}
+	public void setTelephone(String telephone) {
+		this.telephone = telephone;
+	}
+
+
+	public int getNumEnquete() {
+		return numEnquete;
+	}
+
+
+	public void setNumEnquete(int numEnquete) {
+		this.numEnquete = numEnquete;
+	}
+	
 		
 	
 	

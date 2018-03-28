@@ -43,18 +43,19 @@ public class SuspectController {
 		
 		@RequestMapping(value = "/suspect/{id}", method = RequestMethod.GET)
 		public ResponseEntity<?> getSuspect(@PathVariable int id){
-			Suspect suspect = null;
+			//Suspect suspect = null;
+			DataSuspect dataSuspect = null;
 					
 			try {
-				suspect =suspectService.getSuspect(id);
+				dataSuspect =suspectService.getSuspect(id);
 			} catch (Exception e) {
 				return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
 			}
 			
-			if(suspect == null)
+			if(dataSuspect == null)
 				return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
 			
-			return ResponseEntity.status(HttpStatus.OK).body(suspect);
+			return ResponseEntity.status(HttpStatus.OK).body(dataSuspect);
 		}
 		
 	

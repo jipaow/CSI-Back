@@ -1,7 +1,5 @@
 package co.simplon.dao;
 
-import java.util.List;
-
 import co.simplon.model.DataSuspect;
 import co.simplon.model.Suspect;
 
@@ -9,7 +7,7 @@ public interface SuspectDAO {
 	
 	public DataSuspect listSuspect() throws Exception;
 	
-	public Suspect  getSuspect(int id) throws Exception;
+	public DataSuspect  getSuspect(int id) throws Exception;
 	
 	public Suspect insertSuspect(Suspect suspect) throws Exception;
 	

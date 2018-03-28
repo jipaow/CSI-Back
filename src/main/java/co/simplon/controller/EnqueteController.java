@@ -40,18 +40,18 @@ public class EnqueteController {
 	
 	@RequestMapping(value ="/enquete/{id}" , method = RequestMethod.GET)
 	public ResponseEntity<?> getEnquete(@PathVariable int id){
-		Enquete enquete = null;
+		DataEnquete dataEnquete = null;
 				
 		try {
-			enquete =enqueteService.getEnquete(id);
+			dataEnquete =enqueteService.getEnquete(id);
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
 		}
 		
-		if(enquete == null)
+		if(dataEnquete == null)
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
 		
-		return ResponseEntity.status(HttpStatus.OK).body(enquete);
+		return ResponseEntity.status(HttpStatus.OK).body(dataEnquete);
 	}
 	
 	@RequestMapping(value="/enquete", method = RequestMethod.POST)
