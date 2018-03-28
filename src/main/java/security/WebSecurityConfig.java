@@ -16,19 +16,19 @@
 //		  http.csrf().disable().authorizeRequests()
 //		  	.antMatchers("csi/suspects").permitAll()
 //	  		.and()
-//	  		.addFilterBefore(new JWTRoleAuthenticationFilter("ChefPolice","lieutnant", "detective","docteur","inspecteur","agent"),  UsernamePasswordAuthenticationFilter.class)
+//	  		.addFilterBefore(new JWTRoleAuthenticationFilter("chefPolice","lieutnant", "detective","docteur","inspecteur","agent"),  UsernamePasswordAuthenticationFilter.class)
 //	  		.authorizeRequests().antMatchers("csi/suspect").permitAll()
 //	  		.and()
-//	  		.addFilterBefore(new JWTRoleAuthenticationFilter("ChefPolice","lieutnant", "detective","docteur","inspecteur"),  UsernamePasswordAuthenticationFilter.class)
+//	  		.addFilterBefore(new JWTRoleAuthenticationFilter("chefPolice","lieutnant", "detective","docteur","inspecteur"),  UsernamePasswordAuthenticationFilter.class)
 //	  	    .authorizeRequests().antMatchers("csi/suspect/link").permitAll()
 //	  		.and()
-//	  		.addFilterBefore(new JWTRoleAuthenticationFilter("ChefPolice","lieutnant", "detective","docteur","inspecteur"),  UsernamePasswordAuthenticationFilter.class)
+//	  		.addFilterBefore(new JWTRoleAuthenticationFilter("chefPolice","lieutnant", "detective","docteur","inspecteur"),  UsernamePasswordAuthenticationFilter.class)
 //	  		.authorizeRequests().antMatchers("csi/enquetes").permitAll()
 //	  		.and()
-//	  		.addFilterBefore(new JWTRoleAuthenticationFilter("ChefPolice","lieutnant", "detective","docteur","inspecteur","agent"),  UsernamePasswordAuthenticationFilter.class)
+//	  		.addFilterBefore(new JWTRoleAuthenticationFilter("chefPolice","lieutnant", "detective","docteur","inspecteur","agent"),  UsernamePasswordAuthenticationFilter.class)
 //	  		.authorizeRequests().antMatchers("csi/enquete").permitAll()
 //	  		.and()
-//	  		.addFilterBefore(new JWTRoleAuthenticationFilter("ChefPolice","lieutnant", "detective","docteur","inspecteur"),  UsernamePasswordAuthenticationFilter.class);
+//	  		.addFilterBefore(new JWTRoleAuthenticationFilter("chefPolice","lieutnant", "detective","docteur","inspecteur"),  UsernamePasswordAuthenticationFilter.class);
 //		     
 //
 //	  }
