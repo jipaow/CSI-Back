@@ -2,7 +2,12 @@ package co.simplon.model;
 
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * 
+ * @author jean philippe
+ * cette classe permet de typer les objets json et les arraylist envoyées au front
+ *
+ */
 public class DataSuspect {
 	private String type = "suspect";
 	private List <Suspect> data = new ArrayList<>();

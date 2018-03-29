@@ -1,10 +1,6 @@
 package co.simplon.tests;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
-
 import java.util.Arrays;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
@@ -18,9 +14,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.RequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-
 import co.simplon.controller.SuspectController;
-import co.simplon.dao.SuspectDAO;
 import co.simplon.model.DataSuspect;
 import co.simplon.model.Suspect;
 import co.simplon.service.SuspectService;
@@ -39,12 +33,8 @@ public class SuspectControllerTest {
 	
 	@MockBean
 	private SuspectService suspectService;
-	private SuspectDAO suspectDao;
-	
-	
-	
-	
-	
+
+		
 	//test d'un get dans le cas où il n'existe aucun suspect
      @Test
      public void getAllSuspectTest() throws Exception {

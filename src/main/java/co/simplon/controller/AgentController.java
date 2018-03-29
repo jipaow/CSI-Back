@@ -13,7 +13,13 @@ import org.springframework.web.bind.annotation.RestController;
 import co.simplon.model.Agent;
 import co.simplon.model.DataAgent;
 import co.simplon.service.AgentService;
-
+/**
+ * 
+ * @author Kayetan
+ * Link all AgentService methods to URI thru
+ * mapping methods
+ *
+ */
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/csi")
@@ -22,6 +28,7 @@ public class AgentController {
 	@Autowired
 	private AgentService agentService;
 	
+	//map to consult all agents datas
 	@RequestMapping(value = "/agents", method = RequestMethod.GET)
 	public ResponseEntity <?> getAllAgent(){
 		DataAgent dataAgent = null;
@@ -33,6 +40,7 @@ public class AgentController {
 		return ResponseEntity.status(HttpStatus.OK).body(dataAgent);	
 	}
 	
+	//map to consult agent data using id
 	@RequestMapping(value= "/agent/{id}", method = RequestMethod.GET)
 	public ResponseEntity<?> getAgent(@PathVariable int id){
 		DataAgent dataAgent= null;
@@ -44,7 +52,7 @@ public class AgentController {
 		return ResponseEntity.status(HttpStatus.OK).body(dataAgent);
 		
 	}
-	
+	//map to insert a new agent 
 	@RequestMapping(value ="/agent", method = RequestMethod.POST)
 	public ResponseEntity<?> insertAgent(@RequestBody Agent agent){
 	    Agent resultAgent = null;
@@ -67,7 +75,7 @@ public class AgentController {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
 		}
 	}
-	  
+	  //map the update method using id
 	@RequestMapping(value="/agent/{id}", method = RequestMethod.PUT)
 	public ResponseEntity<?> upDateAgent(@RequestBody Agent agent, @PathVariable int id){
 		Agent result = null;
@@ -79,7 +87,8 @@ public class AgentController {
 		}
 		return ResponseEntity.status(HttpStatus.CREATED).body(result);
 	}
-	    	
+	
+	//link Agent to Enquete
 	@RequestMapping(value = "/agent/link", method = RequestMethod.POST)
   public ResponseEntity<?> addAgentToEnquete(@RequestBody Agent agent){
       Agent resultAgent = null;

@@ -7,14 +7,17 @@ import javax.sql.DataSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
-
 import co.simplon.model.Agent;
 import co.simplon.model.DataAgent;
-import co.simplon.model.Suspect;
 
+/**
+ * 
+ * @author Kayetan
+ * Expose interacting methods with database
+ *
+ */
 @Repository
 public class jdbcAgentDAO implements AgentDAO {
 	
@@ -25,6 +28,7 @@ public class jdbcAgentDAO implements AgentDAO {
 	public jdbcAgentDAO(JdbcTemplate jdbcTemplate) {
 		this.datasource = jdbcTemplate.getDataSource();
 	}
+	
 	@Override
 	public DataAgent listAgent() throws Exception {
 		DataAgent dataAgent =  new DataAgent();

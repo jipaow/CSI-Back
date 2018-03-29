@@ -2,7 +2,12 @@ package co.simplon.dao;
 
 import co.simplon.model.Agent;
 import co.simplon.model.DataAgent;
-
+/**
+ * 
+ * @author Kayetan
+ * Force implementing  crud methods in jdbcAgentDAO
+ *
+ */
 public interface AgentDAO {
 	
 	public DataAgent listAgent() throws Exception;

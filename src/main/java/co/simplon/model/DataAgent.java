@@ -2,7 +2,12 @@ package co.simplon.model;
 
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * 
+ * @author Kayetan
+ * Used to type Json objects for front usage
+ *
+ */
 public class DataAgent {
 	String type = "agent";
 	List <Agent> data = new ArrayList<>();
