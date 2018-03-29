@@ -1,5 +1,7 @@
 package co.simplon.model;
 
+import java.sql.Date;
+
 public class Suspect extends Humain {
 	
 
@@ -36,6 +38,17 @@ public class Suspect extends Humain {
 	
 	
 	
+	
+	
+	public Suspect(int id, String nom, String prenom, Date dateNaissance, String genre) {
+		super(id, nom, prenom, dateNaissance, genre);
+		// TODO Auto-generated constructor stub
+	}
+
+
+
+
+
 	public String getNomEnquete() {
 		return nomEnquete;
 	}
@@ -64,6 +77,7 @@ public class Suspect extends Humain {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+
 
 	//getters setters
 	public String getEmpreinte() {

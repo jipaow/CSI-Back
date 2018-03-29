@@ -7,32 +7,63 @@ import co.simplon.model.DataSuspect;
 import co.simplon.model.Suspect;
 
 
-
+/**
+ * 
+ * @author jean philippe
+ * classe permet de faire le lien entre le controller SuspectController et la DAO 
+ * ( interface SuspectDAO et son implementation jdbcSuspectDAO)
+ *
+ */
 @Service
 public class SuspectService {
 	
 	@Autowired
 	private SuspectDAO dao;
 	
-	// Retrieve all rows from table and populate list with objects
+	/**
+	 *  recupere toutes les lignes de la table humain avec un statut suspect (cf addSuspectToEnquete) et les insert dans une list<suspect>
+	 * @return list<suspect>
+	 * @throws Exception
+	 */
 	public DataSuspect getAllSuspect() throws Exception {
 		return dao.listSuspect();
 	}
 	
-	// Retrieves one row from table based on given id
+	/**
+	 * Recupere les information d'un humain avec un statut suspect à partir de son id
+	 * @param id
+	 * @return suspect
+	 * @throws Exception
+	 */
 	public DataSuspect getSuspect(int id) throws Exception {
 		return dao.getSuspect(id);
 	}
 	
-	// Inserts row into table 
+	/**
+	 *  Insert dans la base de données un suspect
+	 * @param suspect
+	 * @return Suspect
+	 * @throws Exception
+	 */
 	public Suspect insertSuspect(Suspect suspect) throws Exception {
 		return dao.insertSuspect(suspect);
 	}
-	
+	/**
+	 * Met à jour un suspect à partr de son id
+	 * @param id
+	 * @param suspect
+	 * @return Suspect
+	 * @throws Exception
+	 */
 	public Suspect updateSuspect( int id ,Suspect suspect) throws Exception {
 		return dao.updateSuspect(suspect);
 	}
-	
+	/**
+	 * Affecte un Humain avec le statut suspect à une enquete en utilisant leurs Id
+	 * @param suspect
+	 * @return Suspect
+	 * @throws Exception
+	 */
 	public Suspect addSuspectToEnquete (Suspect suspect) throws Exception {
 		return dao.addSuspectToEnquete(suspect);
 	}

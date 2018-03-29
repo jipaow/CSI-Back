@@ -5,7 +5,11 @@ import java.util.List;
 import co.simplon.model.DataEnquete;
 import co.simplon.model.Enquete;
 
-
+/**
+ * 
+ * @author Robin
+ *	Interface qui définit les méthodes utilisables dans la classe jdbcEnqueteDAO
+ */
 public interface EnqueteDAO {
 	
 	public DataEnquete listEnquete() throws Exception;

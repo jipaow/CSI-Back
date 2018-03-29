@@ -18,6 +18,12 @@ import co.simplon.model.Enquete;
 import co.simplon.model.Suspect;
 import co.simplon.service.EnqueteService;
 
+/**
+ * 
+ * @author Robin
+ *	Cette classe liste les URI et les traitements associés qui devront être appelées par le front pour pouvoir utiliser les fonctionnalités 
+ *du back 
+ */
 @CrossOrigin(origins="http://localhost:4200")
 @RestController
 @RequestMapping("/csi")

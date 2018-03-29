@@ -2,7 +2,12 @@ package co.simplon.dao;
 
 import co.simplon.model.DataSuspect;
 import co.simplon.model.Suspect;
-
+/**
+ * 
+ * @author jean philippe
+ * interface définit les methodes utilisées dans l'implementation jdbcSuspectDAO
+ *
+ */
 public interface SuspectDAO {
 	
 	public DataSuspect listSuspect() throws Exception;

@@ -12,7 +12,12 @@ import org.springframework.stereotype.Repository;
 
 import co.simplon.model.DataSuspect;
 import co.simplon.model.Suspect;
-
+/**
+ * 
+ * @author jean philippe
+ * cette classe expose les methodes d'interaction avec la base de donnée
+ *
+ */
 @Repository
 public class jdbcSuspectDAO implements SuspectDAO {
 	
@@ -102,7 +107,6 @@ public class jdbcSuspectDAO implements SuspectDAO {
 	@Override
 	public Suspect insertSuspect(Suspect suspect) throws Exception {
 		PreparedStatement pstmt = null;
-			
 		Suspect result = null;
 		int i = 0;
 		
@@ -132,7 +136,8 @@ public class jdbcSuspectDAO implements SuspectDAO {
 			
 			// Run the the update query	
 			pstmt.executeUpdate();
-
+			
+			result = suspect;
 		} catch (SQLException e) {
 			e.printStackTrace();
 			log.error("SQL Error !:" + pstmt.toString(), e);
@@ -187,33 +192,19 @@ public class jdbcSuspectDAO implements SuspectDAO {
             pstmt = datasource.getConnection().prepareStatement(sql);
 
             pstmt.setString(++i, suspect.getNom());
-
             pstmt.setString(++i, suspect.getPrenom());
-
             pstmt.setString(++i, suspect.getGenre());
-
             pstmt.setDate(++i, suspect.getDateNaissance());
-
             pstmt.setString(++i, suspect.getNationalite());
-
             pstmt.setFloat(++i, suspect.getTaille());
-
             pstmt.setInt(++i, suspect.getPoids());
-
             pstmt.setString(++i, suspect.getAdresseConnues());
-
             pstmt.setString(++i, suspect.getSigneDistinctif());
-
             pstmt.setString(++i, suspect.getPhoto());
-
             pstmt.setString(++i, suspect.getEmpreinte());
-
             pstmt.setBoolean(++i, suspect.isCasierJudiciaire());
-
             pstmt.setInt(++i, suspect.getCondamnations());
-
             pstmt.setString(++i, suspect.getTypeCondamnation());
-
             pstmt.setInt(++i, suspect.getId());
 			
 			
@@ -271,7 +262,13 @@ public class jdbcSuspectDAO implements SuspectDAO {
          		}
          		return resultSuspect;
 	}
-	
+	/***
+	 * Cette methode set la valeur de chaque attribut de la classe suspect
+	 * en recuperant les informations de la base de donnée via le ResultSet
+	 * @param rs
+	 * @return suspect
+	 * @throws SQLException
+	 */
 	private Suspect getSuspectFromResultSet(ResultSet rs) throws SQLException {
 		Suspect suspect = new Suspect();
 		suspect.setId(rs.getInt("id_humain"));

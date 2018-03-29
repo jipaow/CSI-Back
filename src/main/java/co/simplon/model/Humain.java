@@ -2,7 +2,7 @@ package co.simplon.model;
 
 import java.sql.Date;
 
-
+// Cette classe regroupe les attributs et les méthodes de base qui constituent un Humain
 public class Humain {
 	private int id;
 	private String nom;

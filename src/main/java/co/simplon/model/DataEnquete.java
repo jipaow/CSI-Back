@@ -3,6 +3,11 @@ package co.simplon.model;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 
+ * @author Robin
+ * Cette classe permet d'envoyer les informations au format adapté pour la récupération côté Angular 
+ */
 public class DataEnquete {
 	private String type = "enquete";
 	private List <Enquete> data = new ArrayList<>();

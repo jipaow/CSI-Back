@@ -1,10 +1,5 @@
 package co.simplon.controller;
 
-
-
-import java.util.List;
-
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +13,14 @@ import org.springframework.web.bind.annotation.RestController;
 import co.simplon.model.DataSuspect;
 import co.simplon.model.Suspect;
 import co.simplon.service.SuspectService;
-
+/**
+ * 
+ * @author jean philippe
+ * classe controller de l'api rest qui 
+ * permet de faire le lien avec la partie front,
+ * Chaque methode lie une URI aux methodes du service SuspectService.
+ *
+ */
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/csi")
@@ -27,7 +29,7 @@ public class SuspectController {
 	 @Autowired
 	 private SuspectService suspectService;
 	 
-	    
+	    //chemin pour consulter tous les suspects
 		@RequestMapping(value = "/suspects", method = RequestMethod.GET)
 		public ResponseEntity <?> getAllSuspect(){
 			DataSuspect dataSuspect = null;
@@ -40,7 +42,7 @@ public class SuspectController {
 			return ResponseEntity.status(HttpStatus.OK).body(dataSuspect);
 		}
 		
-		
+		//chemin pour consulter un suspect par son id
 		@RequestMapping(value = "/suspect/{id}", method = RequestMethod.GET)
 		public ResponseEntity<?> getSuspect(@PathVariable int id){
 			//Suspect suspect = null;
@@ -59,7 +61,7 @@ public class SuspectController {
 		}
 		
 	
-		
+		// chemin pour créer un suspect
 		@RequestMapping(value ="/suspect", method = RequestMethod.POST)
 		public ResponseEntity<?> insertSuspect(@RequestBody Suspect suspect){
 			Suspect resultSuspect = null;
@@ -83,6 +85,9 @@ public class SuspectController {
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
 		}
 			}
+		
+		
+		//chemin pour mettre à jour les infos d'un suspect par son id
 		@RequestMapping(value ="/suspect/{id}", method = RequestMethod.PUT)
 		public ResponseEntity<?> updateSuspect(@RequestBody Suspect suspect,@PathVariable int id) throws Exception{
 			
@@ -114,23 +119,5 @@ public class SuspectController {
 			
 		}
 		
-//		@RequestMapping(value = "/suspect/link", method = RequestMethod.POST)
-//        public ResponseEntity<?> addSuspectToEnquete(@RequestBody Suspect suspect){
-//            Suspect resultSuspect = null;
-//           
-//           try {
-//                resultSuspect = suspectService.addSuspectToEnquete(suspect);
-//                
-//            } catch (Exception e) {
-//                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
-//            }
-//            return ResponseEntity.status(HttpStatus.CREATED).body(resultSuspect);
-//            
-//        }
-		
-	
-	
-
-
 
 }

@@ -2,7 +2,11 @@ package co.simplon.model;
 
 import java.sql.Date;
 
-
+/**
+ * 
+ * @author Robin
+ * Cette classe regroupe les attributs d'une enquête ainsi que les méthodes permettant de les récuperer et de les set
+ */
 public class Enquete {
 	private int numeroDossier;
 	private String nom;

@@ -11,7 +11,13 @@ import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Service;
 import org.springframework.util.FileSystemUtils;
 import org.springframework.web.multipart.MultipartFile;
-
+/**
+ * 
+ * @author jean philippe
+ * cette classe n'est pas implemntée dans le projet
+ * elle doit gerer l'upload et le download de fichier envoyés depuis le front
+ *
+ */
 @Service
 public class StorageService { 
 	private final Path rootLocation = Paths.get("upload-dir");

@@ -16,6 +16,13 @@ import co.simplon.model.DataEnquete;
 import co.simplon.model.Enquete;
 import co.simplon.model.Suspect;
 
+/**
+ * 
+ * @author Robin
+ * Cette classe définit les méthodes d'intéraction avec la base de données
+ * Les détails de chaque fonction peut être retrouvés dans la javaDoc de la classe EnqueteService 
+ *
+ */
 @Repository
 public class jdbcEnqueteDAO implements EnqueteDAO {
 	
@@ -316,7 +323,12 @@ public class jdbcEnqueteDAO implements EnqueteDAO {
 		return result;
 	}
 	
-
+/**
+ * Cette méthode récupère les valeurs des champs de la table enquête et de les lier aux attributs de la classe enquête
+ * @param rs
+ * @return enquete
+ * @throws SQLException
+ */
 	private Enquete getEnqueteFromResultSet(ResultSet rs) throws SQLException {
 		Enquete enquete = new Enquete();
 		enquete.setNumeroDossier(rs.getInt("id_enquete"));
