@@ -1,4 +1,7 @@
 # Projet Csi miami
+### Toutes les images présentes ainsi que d'autres support qui ont permit le developpement du projet sont disponibles dans le dossier Document du projet
+
+A l'attention du client
 ## MODE OPÉRATOIRE
 
 ### Prérequis (Back)
@@ -49,21 +52,21 @@ Via le fichier jar:
 
 - USECASE DE L’APPLICATION
 
-![](Document/Use case csi.png)
+![](Document/UseCase.png)
 
 -DIAGRAMME DE PACKAGE DE FONCTIONNALITES
 
-![](Document/Diagramme package fonctionnalités csi .png)
+![](Document/DiagrammePackageFonctionnalités.png)
 
 ### DIAGRAMMES D’ACTIVITE
 
 - CREATION DE SUSPECT
 
-![](Document/creation fiche suspect.png)
+![](Document/CreationFicheSuspect.png)
 
 - CREATION D'UNE AFFAIRE
 
-![](Document/Creationd d_un fiche affaire.png)
+![](Document/CreationdFicheAffaire.png)
 
 - AJOUT D'UN SUSPECT DANS UNE AFFAIRE
 
@@ -106,9 +109,6 @@ Via le fichier jar:
 ![](Document/schemaBD.PNG)
 
 ### SCRIPTS SQL
-
-#### /!\ LES SCRIPTS SQL SONT CONSULTABLES DANS LE DOSSIER DOCUMENTS /!\
-
 - Document/filRougeSchemaDB.mwb
 - Rappel : Pour l’obtention des données, le fichier “requetesInsertionDonnées.sql” est nécessaire et bien présent dans le projet (/Fil_Rouge/src/main/resources/data.sql)
 
