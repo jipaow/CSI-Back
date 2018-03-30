@@ -106,7 +106,7 @@ Via le fichier jar:
 
 ### SCHEMA SQL
 
-![](Document/schemaBD.PNG)
+![](Document/schemaBD.png)
 
 ### SCRIPTS SQL
 - Document/filRougeSchemaDB.mwb
