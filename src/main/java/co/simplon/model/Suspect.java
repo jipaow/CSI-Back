@@ -37,9 +37,6 @@ public class Suspect extends Humain {
 	}
 	
 	
-	
-	
-	
 	public Suspect(int id, String nom, String prenom, Date dateNaissance, String genre) {
 		super(id, nom, prenom, dateNaissance, genre);
 		// TODO Auto-generated constructor stub
