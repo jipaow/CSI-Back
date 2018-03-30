@@ -307,7 +307,7 @@ public class jdbcEnqueteDAO implements EnqueteDAO {
 		    logSQL(pstmt);
 		    
 		    pstmt.executeUpdate();
-			System.out.println("LA SUPER BOULE D'OR");
+			System.out.println("pstmt ok");
 						
 		} catch (SQLException e) {
 			e.printStackTrace();
