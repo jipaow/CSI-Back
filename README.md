@@ -33,7 +33,7 @@ Via GitHub :
 
 Via le fichier jar:
 1. Ouvrir une invite de commande dans le dossier contenant le fichier jar
-2. Entrer : ```java -jar monFichier.jar```
+2. Entrer : ```java -jar Csiback-0.0.1-SNAPSHOT.jar```
 
 #### Front
 1. Cloner le repository
@@ -111,5 +111,12 @@ Via le fichier jar:
 
 - Document/filRougeSchemaDB.mwb
 - Rappel : Pour l’obtention des données, le fichier “requetesInsertionDonnées.sql” est nécessaire et bien présent dans le projet (/Fil_Rouge/src/main/resources/data.sql)
+
+###GENERATION DU FICHIER Csiback-0.0.1-SNAPSHOT.jar
+ pour génerer le fichier .jar executable sur une autre machine :
+ - on se place dans le dossier du projet (CSI-Back) 
+ - on ouvre un invité de commande à cet emplacement
+ -on tape la commande mvn package ( si le serveur du projet est lancé) ou mvn pacakge -DskipTests (si le serveur du projet n'est pas lancé le build ne se fera pas)
+ -le fichier Csiback-0.0.1-SNAPSHOT.jar est génerer dans le dossier target
 
 
