@@ -38,7 +38,7 @@ public class jdbcAgentDAO implements AgentDAO {
 		ResultSet rs;
 		
 		try {
-			sql = "SELECT DISTINCT * FROM humain INNER JOIN personne_impliquee ON personne_impliquee.humain_id = humain.id_humain WHERE personne_impliquee.status_id = 1 GROUP BY id_humain";
+			sql = "SELECT DISTINCT * FROM humain WHERE grade IS NOT NULL";
 			prep = datasource.getConnection().prepareStatement(sql);
 			
 			rs = prep.executeQuery();
@@ -71,7 +71,7 @@ public class jdbcAgentDAO implements AgentDAO {
 		
 		try {
 			// Prepare requet sql
-			sql = "SELECT DISTINCT * FROM humain INNER JOIN personne_impliquee ON personne_impliquee.humain_id = humain.id_humain WHERE personne_impliquee.status_id = 1 AND humain.id_humain = ? GROUP BY id_humain";
+			sql = "SELECT DISTINCT * FROM humain WHERE id_humain = ? AND grade IS NOT NULL";
 			prep = datasource.getConnection().prepareStatement(sql);
 			prep.setInt(1, id);
 			
