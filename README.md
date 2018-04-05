@@ -119,7 +119,8 @@ Document/schemaDB.png
  -on tape la commande mvn package ( si le serveur du projet est lancé) ou mvn pacakge -DskipTests (si le serveur du projet n'est pas lancé le build ne se fera pas)
  -le fichier Csiback-0.0.1-SNAPSHOT.jar est génerer dans le dossier target
 
-@Author jean-philipe
+____________________________________________________________________________________________________________________________________________
+@Author jean-philippe:
 
 ### BACKEND
 - Package co.simplon.model : Suspect.java  / DataSuspect.java classes ("surclasse" qui permet le typage du modele pour son traitement
