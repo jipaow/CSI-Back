@@ -119,4 +119,30 @@ Document/schemaDB.png
  -on tape la commande mvn package ( si le serveur du projet est lancé) ou mvn pacakge -DskipTests (si le serveur du projet n'est pas lancé le build ne se fera pas)
  -le fichier Csiback-0.0.1-SNAPSHOT.jar est génerer dans le dossier target
 
+@Author jean-philipe
+
+### BACKEND
+- Package co.simplon.model : Suspect.java  / DataSuspect.java classes ("surclasse" qui permet le typage du modele pour son traitement
+par le frontEnd).
+- Package co.simplon.dao : SuspectDAO.java Interface definissant les méthodes de traitement de la couche dao pour comminuquer avec 
+la base de donnée.
+                           jdbcSuspectDAO.java Classe qui implemente les methodes de SuspectDAO.java qui utilise le prepared statement pour executer les requtes sql (les instances de PreparedStatement contiennent des instructions sql déjà compilée qui améliore notement les preformances, les instructions sql contiennent un ou plusieurs paramètres d'entée) afin de communiquer avec le base de donnée.
+- Package co.simplon.service : SuspectService.java Classe qui expose au Controller les méthodes permettant de faire le lien entre 
+la couche DAO et le ce dernier.
+- Package co.simplon.controller: SuspectController.java permet le mapping des requetes url, classe permettant l'interaction entre le client et le server en traitant les actions de l'utilisateur, modifie les données du modèle et de la vue.
+- Package co.simplon.tests ( dans le dossier src/test/java ):  SuspectControllerTest.java teste les methodes getAllSuspect()
+et get SuspectbyId() service/controller.
+                                 TestDAO.java test les methodes Insert et Update.
+ces classes de tests ont été realisé ("pair programming") en collaboration avec Robin.
+- Le projet BackEnd contient des packages et classes realisées en commun tel que Security qui met en place la solution d'authentification fournie par Sebastien, ainsi que StorageService, UploadController qui devaient permettre la gestion d'upload et de download de fichier mais qui devront être implemntées dans une V2, Enfin les classes consernant les armes.
+
+### FRONTEND
+
+- Repository CSI-Front est le repository front commun le tableau, formulaires ( creation et update ) et la carte de détail sontt basée sur les composants realisés sur une maquette front => https://github.com/jipaow/suspectFront. Ces composants ont été largement remaniés et optimisés par Kayetan.
+- Repository suspectFront : Composant (Component) suspect ( tableau de liste des suspects ) / update-suspect ( formulaire d'update des informations d'un suspect) / form-suspect ( formulaire de creation d'un suspect ) / edit-suspect ( carte contenant le détails des infos d'un suspect ainsi que le lien vers le formulaire d'update (d'où le nom de composant pas très judicieux de prime abord) ) / suspect.service.ts classes de service qui permet l'interaction avec la partie server Backend .
+les tel qu'app-routing, app-module, suspect.ts .
+
+                                 
+
+
 
