@@ -80,7 +80,7 @@ Via le fichier jar:
 
 ### DIAGRAMME DE CLASSES
 
-![](Document/classes_fil_rouge(1).png)
+![](Document/classes_fil_rouge.png)
 
 ### MOCKUPS
 
