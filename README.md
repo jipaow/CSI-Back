@@ -35,7 +35,7 @@ Via GitHub :
 5. Lancer l’application via : Run as Spring Boot App
 
 Via le fichier jar:
-1. Ouvrir une invite de commande dans le dossier contenant le fichier jar
+1. Ouvrir une invite de commande dans le dossier contenant le fichier jar ( le dossier target )
 2. Entrer : ```java -jar Csiback-0.0.1-SNAPSHOT.jar```
 
 #### Front
