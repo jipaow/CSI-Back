@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+
 import co.simplon.model.DataSuspect;
 import co.simplon.model.Suspect;
 /**
@@ -306,62 +307,153 @@ public class jdbcSuspectDAO implements SuspectDAO {
 
 
 
+//	@SuppressWarnings("null")
 //	@Override
+//	@Transactional
 //	public void archiverSuspect(int id) throws Exception {
-//		PreparedStatement pstmt = null;
-//		Suspect result = null;
+//		Connection dbConnection = null;
+//		PreparedStatement pstmtInsert = null;
+//		PreparedStatement pstmtDelete1 = null;
+//		PreparedStatement pstmtDelete2 = null;
 //		int i = 0;
 //		
-//		try {
-//			connection.setAutoCommit(false);
-//			String sql = " START TRANSACTION ;  INSERT INTO archive_personne_impliquee (id_archive_personne_impliquee, nom , prenom , date_naissance , genre , photo , date_deces , adresse , grade , competences , date_prise_service , actif , telephone , taille , poids , signe_distinctif , empreinte , casier , nombre_condamnation , type_condamnation , nationalite , statut )  VALUES ((SELECT id_humain FROM humain WHERE id_humain = ?), (SELECT nom FROM humain WHERE id_humain = ?), (SELECT prenom FROM humain WHERE id_humain = ?), (SELECT date_naissance FROM humain WHERE id_humain = ?), (SELECT genre FROM humain WHERE id_humain = ?), (SELECT photo FROM humain WHERE id_humain = ?), (SELECT date_deces FROM humain WHERE id_humain = ?), (SELECT adresse FROM humain WHERE id_humain = ?), (SELECT grade FROM humain WHERE id_humain = ?), (SELECT competences FROM humain WHERE id_humain = ?),  (SELECT date_prise_service FROM humain WHERE id_humain = ?), (SELECT actif FROM humain WHERE id_humain = ?), (SELECT telephone FROM humain WHERE id_humain = ?), (SELECT taille FROM humain WHERE id_humain = ?), (SELECT poids FROM humain WHERE id_humain = ?), (SELECT signe_distinctif FROM humain WHERE id_humain = ?), (SELECT empreinte FROM humain WHERE id_humain = ?), (SELECT casier FROM humain WHERE id_humain = ?), (SELECT nombre_condamnation FROM humain WHERE id_humain = ?), (SELECT type_condamnation FROM humain WHERE id_humain = ?), (SELECT nationalite FROM humain WHERE id_humain = ?), (SELECT status_id FROM personne_impliquee WHERE humain_id = ?)) ; DELETE FROM personne_impliquee WHERE humain_id = ? ; DELETE FROM humain WHERE id_humain = ?; COMMIT ; ";
+//		
+//		String insertSql = " INSERT INTO archive_personne_impliquee (id_archive_personne_impliquee, nom , prenom , date_naissance , genre , photo , date_deces , adresse , grade , competences , date_prise_service , actif , telephone , taille , poids , signe_distinctif , empreinte , casier , nombre_condamnation , type_condamnation , nationalite , statut )  VALUES ((SELECT id_humain FROM humain WHERE id_humain = ?), (SELECT nom FROM humain WHERE id_humain = ?), (SELECT prenom FROM humain WHERE id_humain = ?), (SELECT date_naissance FROM humain WHERE id_humain = ?), (SELECT genre FROM humain WHERE id_humain = ?), (SELECT photo FROM humain WHERE id_humain = ?), (SELECT date_deces FROM humain WHERE id_humain = ?), (SELECT adresse FROM humain WHERE id_humain = ?), (SELECT grade FROM humain WHERE id_humain = ?), (SELECT competences FROM humain WHERE id_humain = ?),  (SELECT date_prise_service FROM humain WHERE id_humain = ?), (SELECT actif FROM humain WHERE id_humain = ?), (SELECT telephone FROM humain WHERE id_humain = ?), (SELECT taille FROM humain WHERE id_humain = ?), (SELECT poids FROM humain WHERE id_humain = ?), (SELECT signe_distinctif FROM humain WHERE id_humain = ?), (SELECT empreinte FROM humain WHERE id_humain = ?), (SELECT casier FROM humain WHERE id_humain = ?), (SELECT nombre_condamnation FROM humain WHERE id_humain = ?), (SELECT type_condamnation FROM humain WHERE id_humain = ?), (SELECT nationalite FROM humain WHERE id_humain = ?), (SELECT status_id FROM personne_impliquee WHERE humain_id = ?))" ;
+//		String deleteSql1 = " DELETE FROM personne_impliquee WHERE humain_id = ?";
+//		String deleteSql2 = "DELETE FROM humain WHERE id_humain = ?";
 //			
-//			pstmt = datasource.getConnection().prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
+//		
+//		
+//		try {
+//			//String sql = " START TRANSACTION ;  INSERT INTO archive_personne_impliquee (id_archive_personne_impliquee, nom , prenom , date_naissance , genre , photo , date_deces , adresse , grade , competences , date_prise_service , actif , telephone , taille , poids , signe_distinctif , empreinte , casier , nombre_condamnation , type_condamnation , nationalite , statut )  VALUES ((SELECT id_humain FROM humain WHERE id_humain = ?), (SELECT nom FROM humain WHERE id_humain = ?), (SELECT prenom FROM humain WHERE id_humain = ?), (SELECT date_naissance FROM humain WHERE id_humain = ?), (SELECT genre FROM humain WHERE id_humain = ?), (SELECT photo FROM humain WHERE id_humain = ?), (SELECT date_deces FROM humain WHERE id_humain = ?), (SELECT adresse FROM humain WHERE id_humain = ?), (SELECT grade FROM humain WHERE id_humain = ?), (SELECT competences FROM humain WHERE id_humain = ?),  (SELECT date_prise_service FROM humain WHERE id_humain = ?), (SELECT actif FROM humain WHERE id_humain = ?), (SELECT telephone FROM humain WHERE id_humain = ?), (SELECT taille FROM humain WHERE id_humain = ?), (SELECT poids FROM humain WHERE id_humain = ?), (SELECT signe_distinctif FROM humain WHERE id_humain = ?), (SELECT empreinte FROM humain WHERE id_humain = ?), (SELECT casier FROM humain WHERE id_humain = ?), (SELECT nombre_condamnation FROM humain WHERE id_humain = ?), (SELECT type_condamnation FROM humain WHERE id_humain = ?), (SELECT nationalite FROM humain WHERE id_humain = ?), (SELECT status_id FROM personne_impliquee WHERE humain_id = ?)) ; DELETE FROM personne_impliquee WHERE humain_id = ? ; DELETE FROM humain WHERE id_humain = ?; COMMIT ; ";
+//			dbConnection.setAutoCommit(false);
+//			
+//			pstmtInsert = datasource.getConnection().prepareStatement(insertSql, PreparedStatement.RETURN_GENERATED_KEYS);
+//			pstmtDelete1 = datasource.getConnection().prepareStatement(deleteSql1, PreparedStatement.RETURN_GENERATED_KEYS);
+//			pstmtDelete2 = datasource.getConnection().prepareStatement(deleteSql2, PreparedStatement.RETURN_GENERATED_KEYS);
 //			
 //			for (int j=1 ; j<25 ; j++) {
-//				pstmt.setInt(++i, id);
+//				pstmtInsert.setInt(++i, id);
 //			}
 //			
-//			logSQL(pstmt);
-//			System.out.println(sql);
-//			pstmt.executeUpdate();
+//			logSQL(pstmtInsert);
+//			logSQL(pstmtDelete1);
+//			logSQL(pstmtDelete2);
+//		
+//			pstmtInsert.executeUpdate();
+//			pstmtDelete1.executeUpdate();
+//			pstmtDelete2.executeUpdate();
+//			
+//			dbConnection.commit();
+//			
 //			}catch (SQLException e) {
 //				e.printStackTrace();
-//				log.error("SQL Error !:" + pstmt.toString(), e);
+//				log.error("SQL Error !:" + pstmtInsert.toString(), e);
+//				log.error("SQL Error !:" + pstmtDelete1.toString(), e);
+//				log.error("SQL Error !:" + pstmtDelete2.toString(), e);
 //				throw e;
+//				
 //			} finally {
-//				pstmt.close();
-//				connection.close();
+//				pstmtInsert.close();
+//				pstmtDelete1.close();
+//				pstmtDelete2.close();
+//				dbConnection.close();
 //			}
 //	
 //
 //	}
 	
+	
+//	@Override
+//	public void archiverSuspect(int id) throws Exception{
+//		PreparedStatement pstmt = null;
+//		int i =0;
+//		try {
+//			String sql = "INSERT INTO archive_personne_impliquee (id_archive_personne_impliquee, nom , prenom , date_naissance , genre , photo , date_deces , adresse , grade , competences , date_prise_service , actif , telephone , taille , poids , signe_distinctif , empreinte , casier , nombre_condamnation , type_condamnation , nationalite , statut )  VALUES ((SELECT id_humain FROM humain WHERE id_humain = ?), (SELECT nom FROM humain WHERE id_humain = ?), (SELECT prenom FROM humain WHERE id_humain = ?), (SELECT date_naissance FROM humain WHERE id_humain = ?), (SELECT genre FROM humain WHERE id_humain = ?), (SELECT photo FROM humain WHERE id_humain = ?), (SELECT date_deces FROM humain WHERE id_humain = ?), (SELECT adresse FROM humain WHERE id_humain = ?), (SELECT grade FROM humain WHERE id_humain = ?), (SELECT competences FROM humain WHERE id_humain = ?),  (SELECT date_prise_service FROM humain WHERE id_humain = ?), (SELECT actif FROM humain WHERE id_humain = ?), (SELECT telephone FROM humain WHERE id_humain = ?), (SELECT taille FROM humain WHERE id_humain = ?), (SELECT poids FROM humain WHERE id_humain = ?), (SELECT signe_distinctif FROM humain WHERE id_humain = ?), (SELECT empreinte FROM humain WHERE id_humain = ?), (SELECT casier FROM humain WHERE id_humain = ?), (SELECT nombre_condamnation FROM humain WHERE id_humain = ?), (SELECT type_condamnation FROM humain WHERE id_humain = ?), (SELECT nationalite FROM humain WHERE id_humain = ?), (SELECT status_id FROM personne_impliquee WHERE humain_id = ?)) ;";
+//			
+//			pstmt = datasource.getConnection().prepareStatement(sql,PreparedStatement.RETURN_GENERATED_KEYS);
+//			for (int j=1 ; j<23 ; j++) {
+//				pstmt.setInt(++i, id);
+//			}
+//				
+//				logSQL(pstmt);
+//				pstmt.executeUpdate();
+//			} catch (SQLException e) {
+//				e.printStackTrace();
+//				log.error("SQL Error !:" + pstmt.toString(), e);
+//				throw e;
+//			} finally {
+//				pstmt.close();
+//			}
+//			
+//	}
+	
 	@Override
 	public void archiverSuspect(int id) throws Exception{
-		PreparedStatement pstmt = null;
-		int i =0;
+		PreparedStatement pstmt = null; 
+		PreparedStatement pstmt2 = null;
+		Suspect suspect = null;
+		int i = 0;
+		ResultSet rs;
+		
 		try {
-			String sql = "INSERT INTO archive_personne_impliquee (id_archive_personne_impliquee, nom , prenom , date_naissance , genre , photo , date_deces , adresse , grade , competences , date_prise_service , actif , telephone , taille , poids , signe_distinctif , empreinte , casier , nombre_condamnation , type_condamnation , nationalite , statut )  VALUES ((SELECT id_humain FROM humain WHERE id_humain = ?), (SELECT nom FROM humain WHERE id_humain = ?), (SELECT prenom FROM humain WHERE id_humain = ?), (SELECT date_naissance FROM humain WHERE id_humain = ?), (SELECT genre FROM humain WHERE id_humain = ?), (SELECT photo FROM humain WHERE id_humain = ?), (SELECT date_deces FROM humain WHERE id_humain = ?), (SELECT adresse FROM humain WHERE id_humain = ?), (SELECT grade FROM humain WHERE id_humain = ?), (SELECT competences FROM humain WHERE id_humain = ?),  (SELECT date_prise_service FROM humain WHERE id_humain = ?), (SELECT actif FROM humain WHERE id_humain = ?), (SELECT telephone FROM humain WHERE id_humain = ?), (SELECT taille FROM humain WHERE id_humain = ?), (SELECT poids FROM humain WHERE id_humain = ?), (SELECT signe_distinctif FROM humain WHERE id_humain = ?), (SELECT empreinte FROM humain WHERE id_humain = ?), (SELECT casier FROM humain WHERE id_humain = ?), (SELECT nombre_condamnation FROM humain WHERE id_humain = ?), (SELECT type_condamnation FROM humain WHERE id_humain = ?), (SELECT nationalite FROM humain WHERE id_humain = ?), (SELECT status_id FROM personne_impliquee WHERE humain_id = ?)) ;";
+			String sql = "SELECT * FROM humain WHERE id_humain = ?";
+			pstmt = datasource.getConnection().prepareStatement(sql);
+			pstmt.setInt(1, id);
 			
-			pstmt = datasource.getConnection().prepareStatement(sql,PreparedStatement.RETURN_GENERATED_KEYS);
-			for (int j=1 ; j<23 ; j++) {
-				pstmt.setInt(++i, id);
+			// Run la requete
+			rs = pstmt.executeQuery();
+			
+			// Log info
+			logSQL(pstmt);
+
+			// gere le resultat de la requete
+			while (rs.next()) {
+				suspect = getSuspectFromResultSet(rs);	
 			}
-				
-				logSQL(pstmt);
-				pstmt.executeUpdate();
-			} catch (SQLException e) {
+			
+		}catch(Exception e) {
 				e.printStackTrace();
 				log.error("SQL Error !:" + pstmt.toString(), e);
 				throw e;
-			} finally {
-				pstmt.close();
-			}
-			
+		}
 		
-	}
+		try {
+		
+		String insertSql = " INSERT INTO archive_personne_impliquee ( id_archive_personne_impliquee , nom, prenom, genre, date_naissance, nationalite, taille, poids, adresse, signe_distinctif,photo, empreinte, casier,nombre_condamnation, type_condamnation ) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+		pstmt2 = datasource.getConnection().prepareStatement(insertSql, PreparedStatement.RETURN_GENERATED_KEYS);
+		pstmt2.setInt(++i, suspect.getId());
+		pstmt2.setString(++i, suspect.getNom());
+		pstmt2.setString(++i, suspect.getPrenom());
+		pstmt2.setString(++i, suspect.getGenre());
+		pstmt2.setDate(++i, suspect.getDateNaissance());
+		pstmt2.setString(++i, suspect.getNationalite());
+		pstmt2.setFloat(++i,suspect.getTaille());
+		pstmt2.setInt(++i, suspect.getPoids());
+		pstmt2.setString(++i, suspect.getAdresseConnues());
+		pstmt2.setString(++i, suspect.getSigneDistinctif());
+		pstmt2.setString(++i, suspect.getPhoto());
+		pstmt2.setString(++i, suspect.getEmpreinte());
+		pstmt2.setBoolean(++i, suspect.isCasierJudiciaire());
+		pstmt2.setInt(++i, suspect.getCondamnations());
+		pstmt2.setString(++i, suspect.getTypeCondamnation());
 
+			// Log info
+		logSQL(pstmt2);
+		
+			// Run the the update query	
+		pstmt2.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			log.error("SQL Error !:" + pstmt2.toString(), e);
+			throw e;
+		} finally {
+		pstmt2.close();
+		}
+	}
+	
+	
 	@Override
 	public void supprimerJointureSuspect(int id) throws Exception {
 		PreparedStatement pstmt = null;

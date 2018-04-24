@@ -123,8 +123,8 @@ public class SuspectController {
 		public ResponseEntity<?> archiverSuspect(@PathVariable int id ) {
 			try {
 				suspectService.archiverSuspect(id);
-				suspectService.supprimerJointureSuspect(id);
-				suspectService.supprimerSuspect(id);
+//				suspectService.supprimerJointureSuspect(id);
+//				suspectService.supprimerSuspect(id);
 			}catch (Exception e) {
 				return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
 			}

@@ -3,6 +3,8 @@ package co.simplon.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import co.simplon.dao.EnqueteDAO;
 import co.simplon.model.DataEnquete;
 import co.simplon.model.Enquete;
@@ -72,6 +74,8 @@ public class EnqueteService {
 	 * @return enquete
 	 * @throws Exception
 	 */
+	
+	
 	public Enquete archiverEnquete (int id) throws Exception {
 		return dao.archiverEnquete(id);
 	}

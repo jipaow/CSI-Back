@@ -2,6 +2,8 @@ package co.simplon.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import co.simplon.dao.SuspectDAO;
 import co.simplon.model.DataSuspect;
 import co.simplon.model.Suspect;
@@ -78,17 +80,21 @@ public class SuspectService {
 	 * @param id
 	 * @throws Exception
 	 */
-	public void archiverSuspect (int id) throws Exception{
-		dao.archiverSuspect(id);
+	@Transactional
+	public void archiverSuspect (int id) throws Exception {
+			dao.archiverSuspect(id);
+			dao.supprimerJointureSuspect(id);
+			dao.supprimerSuspect(id);
+			
 	}
 	
-	public void supprimerJointureSuspect (int  id) throws Exception{
-		dao.supprimerJointureSuspect(id);
-	}
-	
-	public void supprimerSuspect (int id) throws Exception{
-		dao.supprimerSuspect(id);
-	}
+//	public void supprimerJointureSuspect (int  id) throws Exception{
+//		dao.supprimerJointureSuspect(id);
+//	}
+//	
+//	public void supprimerSuspect (int id) throws Exception{
+//		dao.supprimerSuspect(id);
+//	}
 	
 	
 	
