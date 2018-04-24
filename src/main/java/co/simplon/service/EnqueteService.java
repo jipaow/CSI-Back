@@ -72,8 +72,8 @@ public class EnqueteService {
 	 * @return enquete
 	 * @throws Exception
 	 */
-	public Enquete archiverEnquete (Enquete enquete) throws Exception {
-		return dao.archiverEnquete(enquete);
+	public Enquete archiverEnquete (int id) throws Exception {
+		return dao.archiverEnquete(id);
 	}
 	
 	/**

@@ -9,6 +9,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
+
+import co.simplon.model.Arme;
 import co.simplon.model.DataEnquete;
 import co.simplon.model.Enquete;
 
@@ -143,13 +145,13 @@ public class jdbcEnqueteDAO implements EnqueteDAO {
 	  * 
 	  */
 	@Override
-	public Enquete archiverEnquete(Enquete enquete) throws Exception {
+	public Enquete archiverEnquete(int id) throws Exception {
 		PreparedStatement pstmt = null;
 		Enquete result = null;
 		int i = 0;
 		
 		try {
-		String sql = "INSERT INTO enquete_old (enquete_id_archive, nom_enquete_archive, type_affaire_archive, date_creation_archive, localisation_archive, statut_archive, classee)" 
+		String sql = "INSERT INTO archive_enquete (enquete_id_archive, nom_enquete_archive, type_affaire_archive, date_creation_archive, localisation_archive, statut_archive, classee_archive)" 
 						+ "VALUES ((select id_enquete from enquete where id_enquete = ?),"
 								+ "(select nom_enquete from enquete where  id_enquete = ?),"
 								+ "(select type_affaire from enquete where id_enquete = ?),"
@@ -160,13 +162,13 @@ public class jdbcEnqueteDAO implements EnqueteDAO {
 		
 		pstmt = datasource.getConnection().prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
 		
-		pstmt.setInt(++i, enquete.getNumeroDossier());
-		pstmt.setInt(++i, enquete.getNumeroDossier());
-		pstmt.setInt(++i, enquete.getNumeroDossier());
-		pstmt.setInt(++i, enquete.getNumeroDossier());
-		pstmt.setInt(++i, enquete.getNumeroDossier());
-		pstmt.setInt(++i, enquete.getNumeroDossier());
-		pstmt.setInt(++i, enquete.getNumeroDossier());
+		pstmt.setInt(++i, id);
+		pstmt.setInt(++i, id);
+		pstmt.setInt(++i, id);
+		pstmt.setInt(++i, id);
+		pstmt.setInt(++i, id);
+		pstmt.setInt(++i, id);
+		pstmt.setInt(++i, id);
 		
 		logSQL(pstmt);
 		
@@ -338,6 +340,47 @@ public class jdbcEnqueteDAO implements EnqueteDAO {
 		
 		return enquete;	
 	}
+
+/*	methode pour recupérer une arme impliquée dans une enquete non implémentée dans le front.
+ * Ecrite à titre d'exemple de jointure "inner join " enquete/arme 
+ * @Override
+public DataEnquete getArmeFromEnquete(int id) throws Exception {
+	Enquete enquete;
+	Arme arme;
+	PreparedStatement pstmt = null;
+	ResultSet rs;
+	String sql;
+	DataEnquete dataEnquete = new DataEnquete();
+	
+	try {
+		// Prepare la requete sql
+		sql = "SELECT * FROM  enquete e INNER JOIN arme a  ON e.id_enquete = a.enquete_id WHERE e.id_enquete = ?";
+		pstmt = datasource.getConnection().prepareStatement(sql);
+		pstmt.setInt(1, id);
+		// Run la requete
+		rs = pstmt.executeQuery();
+		
+		// Log info
+		logSQL(pstmt);
+
+		// gere le resultat de la requete
+		while (rs.next()) {
+			enquete = getEnqueteFromResultSet(rs);
+			dataEnquete.getData().add(enquete);
+		}
+			
+	} catch (Exception e) {
+		e.printStackTrace();
+		log.error("SQL Error !:" + pstmt.toString(), e);
+		throw e;
+	} finally {
+		pstmt.close();
+	}
+
+	return dataEnquete;
+	
+	
+}*/
 
 	
 

@@ -73,5 +73,24 @@ public class SuspectService {
 		return dao.verifSuspectExiste(suspect);
 	}
 	
+	/**
+	 * Archive une personne impliquée en tant que suspect de la liste des suspects et l'ajoute à la table archive_suspect
+	 * @param id
+	 * @throws Exception
+	 */
+	public void archiverSuspect (int id) throws Exception{
+		dao.archiverSuspect(id);
+	}
+	
+	public void supprimerJointureSuspect (int  id) throws Exception{
+		dao.supprimerJointureSuspect(id);
+	}
+	
+	public void supprimerSuspect (int id) throws Exception{
+		dao.supprimerSuspect(id);
+	}
+	
+	
+	
 
 }

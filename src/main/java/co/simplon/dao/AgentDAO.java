@@ -21,4 +21,10 @@ public interface AgentDAO {
 	public Agent addAgentToEnquete(Agent agent) throws Exception;
     
 	public int verifAgentExiste(Agent agent) throws Exception;
+	
+	public void archiverAgent(int id) throws Exception;
+	
+	public void supprimerJointureAgent (int id) throws Exception;
+	
+	public void supprimerAgent (int id) throws Exception; 
 }

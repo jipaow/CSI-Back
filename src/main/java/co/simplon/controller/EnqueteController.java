@@ -69,8 +69,6 @@ public class EnqueteController {
 		if((localisation == null) || (localisation.isEmpty()))
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Saisissez une localisation !");
 		
-		
-		
 		try {
 			resultEnquete = enqueteService.insertEnquete(enquete);
 		} catch (Exception e) {
@@ -80,17 +78,6 @@ public class EnqueteController {
 		return ResponseEntity.status(HttpStatus.CREATED).body(resultEnquete);
 	}
 	
-	@RequestMapping(value="/archiver", method = RequestMethod.POST)
-	public ResponseEntity<?> archiverEnquete(@RequestBody Enquete enquete){
-		Enquete resultEnquete = null;
-		
-		try {
-			resultEnquete = enqueteService.archiverEnquete(enquete);
-		} catch (Exception e) {
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
-		}
-		return ResponseEntity.status(HttpStatus.CREATED).body(resultEnquete);
-	}
 	
 	@RequestMapping(value ="/enquete/{id}", method = RequestMethod.PUT)
 	public ResponseEntity<?> updateEnquete(@RequestBody Enquete enquete,@PathVariable int id) throws Exception{
@@ -107,33 +94,20 @@ public class EnqueteController {
 		return  ResponseEntity.status(HttpStatus.CREATED).body(result);
 		
 	}
-	
-	@RequestMapping(value="supprimerJointure/{id}", method = RequestMethod.DELETE)
-	public ResponseEntity<?> supprimerJointureEnquete(@PathVariable int id){
 		
+	@RequestMapping(value ="/archiverEnquete/{id}", method = RequestMethod.DELETE)
+	public ResponseEntity<?> archiverEnquete(@PathVariable int id){
 		try {
+			enqueteService.archiverEnquete(id);
 			enqueteService.supprimerJointureEnquete(id);
-		 } catch (Exception e) {
+			enqueteService.supprimerEnquete(id);
+		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
 		}
-
+		
 		return ResponseEntity.status(HttpStatus.OK).body(null);
 	}
 	
-	@RequestMapping(value="supprimer/{id}", method = RequestMethod.DELETE)
-	public ResponseEntity<?> supprimerEnquete(@PathVariable int id){
-		
-		try {
-			System.out.println("test");
-			enqueteService.supprimerEnquete(id);
-			System.out.println("test ok");
-			
-		 } catch (Exception e) {
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
-		}
-		
-		return ResponseEntity.status(HttpStatus.OK).body(null);
-	}
 	
 	@RequestMapping(value = "/suspect/link", method = RequestMethod.POST)
     public ResponseEntity<?> addSuspectToEnquete(@RequestBody Enquete enquete){

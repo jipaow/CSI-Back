@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: co.simplon.tests.SuspectControllerTest
 -------------------------------------------------------------------------------
-Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.055 sec - in co.simplon.tests.SuspectControllerTest
+Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.016 sec - in co.simplon.tests.SuspectControllerTest

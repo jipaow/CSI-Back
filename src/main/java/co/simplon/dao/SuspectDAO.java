@@ -1,6 +1,7 @@
 package co.simplon.dao;
 
 import co.simplon.model.DataSuspect;
+import co.simplon.model.Enquete;
 import co.simplon.model.Suspect;
 /**
  * 
@@ -21,5 +22,12 @@ public interface SuspectDAO {
 	public Suspect addSuspectToEnquete (Suspect suspect) throws Exception;
 	
 	public int verifSuspectExiste (Suspect suspect) throws Exception;
+	
+    public void archiverSuspect (int id) throws Exception;
+    
+    public void supprimerJointureSuspect (int id) throws Exception;
+    
+    public void supprimerSuspect (int id) throws Exception;
+	
 
 }

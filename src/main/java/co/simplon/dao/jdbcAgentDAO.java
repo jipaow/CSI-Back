@@ -11,6 +11,8 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import co.simplon.model.Agent;
 import co.simplon.model.DataAgent;
+import co.simplon.model.DataSuspect;
+import co.simplon.model.Suspect;
 
 /**
  * 
@@ -93,6 +95,48 @@ public class jdbcAgentDAO implements AgentDAO {
 		
 		return dataAgent;
 	}
+	
+	/**
+	 * 
+	 * Alternative method to get an agent using inner join request
+	 * 
+	public DataSuspect getAgent (int id) throws Exception {
+		Agent agent;
+		PreparedStatement pstmt = null;
+		ResultSet rs;
+		String sql;
+		DataAgent dataSuspect = new DataAgent();
+		
+		try {
+			// Prepare la requete sql
+			sql = "SELECT DISTINCT * FROM humain INNER JOIN personne_impliquee ON personne_impliquee.humain_id = humain.id_humain WHERE personne_impliquee.status_id = 1 AND humain.id_humain = ? GROUP BY id_humain";
+			pstmt = datasource.getConnection().prepareStatement(sql);
+			pstmt.setInt(1, id);
+			
+			// Run la requete
+			rs = pstmt.executeQuery();
+			
+			// Log info
+			logSQL(pstmt);
+
+			// gere le resultat de la requete
+			while (rs.next()) {
+				suspect = getSuspectFromResultSet(rs);
+				dataAgent.getData().add(agent);
+			}
+				
+		} catch (Exception e) {
+			e.printStackTrace();
+			log.error("SQL Error !:" + pstmt.toString(), e);
+			throw e;
+		} finally {
+			pstmt.close();
+		}
+		
+		return dataAgent;
+	}
+	
+	*/
 	@Override
 	public Agent insertAgent(Agent agent) throws Exception {
 		PreparedStatement pstmt = null;
@@ -201,7 +245,7 @@ public class jdbcAgentDAO implements AgentDAO {
 		ResultSet rs;
 		
 		try {
-			// Prepare requet sql
+			// Prepare requete sql
 			sql = "SELECT * FROM humain WHERE nom = ? AND prenom = ?";
 			
 			prepStat = datasource.getConnection().prepareStatement(sql);
@@ -256,7 +300,118 @@ public class jdbcAgentDAO implements AgentDAO {
 		log.debug(sql);
 	}
 
+	@Override
+	public void archiverAgent(int id) throws Exception {
+		PreparedStatement pstmt = null;
+		int i =0;
+		try {
+			String sql = "INSERT INTO archive_personne_impliquee (id_archive_personne_impliquee, nom , prenom , date_naissance , genre , photo , date_deces , adresse , grade , competences , date_prise_service , actif , telephone , taille , poids , signe_distinctif , empreinte , casier , nombre_condamnation , type_condamnation , nationalite , statut )  VALUES ((SELECT id_humain FROM humain WHERE id_humain = ?), (SELECT nom FROM humain WHERE id_humain = ?), (SELECT prenom FROM humain WHERE id_humain = ?), (SELECT date_naissance FROM humain WHERE id_humain = ?), (SELECT genre FROM humain WHERE id_humain = ?), (SELECT photo FROM humain WHERE id_humain = ?), (SELECT date_deces FROM humain WHERE id_humain = ?), (SELECT adresse FROM humain WHERE id_humain = ?), (SELECT grade FROM humain WHERE id_humain = ?), (SELECT competences FROM humain WHERE id_humain = ?),  (SELECT date_prise_service FROM humain WHERE id_humain = ?), (SELECT actif FROM humain WHERE id_humain = ?), (SELECT telephone FROM humain WHERE id_humain = ?), (SELECT taille FROM humain WHERE id_humain = ?), (SELECT poids FROM humain WHERE id_humain = ?), (SELECT signe_distinctif FROM humain WHERE id_humain = ?), (SELECT empreinte FROM humain WHERE id_humain = ?), (SELECT casier FROM humain WHERE id_humain = ?), (SELECT nombre_condamnation FROM humain WHERE id_humain = ?), (SELECT type_condamnation FROM humain WHERE id_humain = ?), (SELECT nationalite FROM humain WHERE id_humain = ?), (SELECT status_id FROM personne_impliquee WHERE humain_id = ?)) ;";
+			
+			pstmt = datasource.getConnection().prepareStatement(sql,PreparedStatement.RETURN_GENERATED_KEYS);
+			for (int j=1 ; j<23 ; j++) {
+				pstmt.setInt(++i, id);
+			}
+				
+				logSQL(pstmt);
+				pstmt.executeUpdate();
+			} catch (SQLException e) {
+				e.printStackTrace();
+				log.error("SQL Error !:" + pstmt.toString(), e);
+				throw e;
+			} finally {
+				pstmt.close();
+			}
+		
+	}
+
+	@Override
+	public void supprimerJointureAgent(int id) throws Exception {
+		PreparedStatement pstmt = null;
+		try {
+			String sql = "DELETE FROM personne_impliquee WHERE humain_id = ?";
+			pstmt = datasource.getConnection().prepareStatement(sql);
+			pstmt.setInt(1, id);
+			
+			logSQL(pstmt);
+			
+			// Run the the update query
+			pstmt.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			log.error("SQL Error !:" + pstmt.toString(), e);
+			throw e;
+		} finally {
+			pstmt.close();
+		}
+			
+	}
+
+	@Override
+	public void supprimerAgent(int id) throws Exception {
+		PreparedStatement pstmt = null;
+		try {
+			String sql = "DELETE FROM humain where id_humain = ?";
+			pstmt = datasource.getConnection().prepareStatement(sql);
+			pstmt.setInt(1, id);
+			
+			logSQL(pstmt);
+			
+			// Run the the update query
+			int result = pstmt.executeUpdate();
+			if(result != 1)
+				throw new Exception("Suspect non trouvé");
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			log.error("SQL Error !:" + pstmt.toString(), e);
+			throw e;
+		} finally {
+			
+			pstmt.close();
+		}
+					
+	}
 	
-	
+	/*	for example of inner join request 
+	 * @Override
+	public DataEnquete getArmeFromEnquete(int id) throws Exception {
+		Enquete enquete;
+		Arme arme;
+		PreparedStatement pstmt = null;
+		ResultSet rs;
+		String sql;
+		DataEnquete dataEnquete = new DataEnquete();
+		
+		try {
+			// Prepare la requete sql
+			sql = "SELECT * FROM  enquete e INNER JOIN arme a  ON e.id_enquete = a.enquete_id WHERE e.id_enquete = ?";
+			pstmt = datasource.getConnection().prepareStatement(sql);
+			pstmt.setInt(1, id);
+			// Run la requete
+			rs = pstmt.executeQuery();
+			
+			// Log info
+			logSQL(pstmt);
+
+			// gere le resultat de la requete
+			while (rs.next()) {
+				enquete = getEnqueteFromResultSet(rs);
+				dataEnquete.getData().add(enquete);
+			}
+				
+		} catch (Exception e) {
+			e.printStackTrace();
+			log.error("SQL Error !:" + pstmt.toString(), e);
+			throw e;
+		} finally {
+			pstmt.close();
+		}
+
+		return dataEnquete;
+		
+		
+	}*/
+
 
 }

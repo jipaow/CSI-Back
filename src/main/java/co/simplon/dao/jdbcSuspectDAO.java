@@ -1,5 +1,6 @@
 package co.simplon.dao;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -23,6 +24,7 @@ public class jdbcSuspectDAO implements SuspectDAO {
 	
 	private DataSource datasource;
 	private final Logger log = LoggerFactory.getLogger(this.getClass());
+	Connection connection = null;
 	
 	@Autowired
 	public jdbcSuspectDAO(JdbcTemplate jdbcTemplate) {
@@ -302,4 +304,116 @@ public class jdbcSuspectDAO implements SuspectDAO {
 
 	}
 
-}
+
+
+//	@Override
+//	public void archiverSuspect(int id) throws Exception {
+//		PreparedStatement pstmt = null;
+//		Suspect result = null;
+//		int i = 0;
+//		
+//		try {
+//			connection.setAutoCommit(false);
+//			String sql = " START TRANSACTION ;  INSERT INTO archive_personne_impliquee (id_archive_personne_impliquee, nom , prenom , date_naissance , genre , photo , date_deces , adresse , grade , competences , date_prise_service , actif , telephone , taille , poids , signe_distinctif , empreinte , casier , nombre_condamnation , type_condamnation , nationalite , statut )  VALUES ((SELECT id_humain FROM humain WHERE id_humain = ?), (SELECT nom FROM humain WHERE id_humain = ?), (SELECT prenom FROM humain WHERE id_humain = ?), (SELECT date_naissance FROM humain WHERE id_humain = ?), (SELECT genre FROM humain WHERE id_humain = ?), (SELECT photo FROM humain WHERE id_humain = ?), (SELECT date_deces FROM humain WHERE id_humain = ?), (SELECT adresse FROM humain WHERE id_humain = ?), (SELECT grade FROM humain WHERE id_humain = ?), (SELECT competences FROM humain WHERE id_humain = ?),  (SELECT date_prise_service FROM humain WHERE id_humain = ?), (SELECT actif FROM humain WHERE id_humain = ?), (SELECT telephone FROM humain WHERE id_humain = ?), (SELECT taille FROM humain WHERE id_humain = ?), (SELECT poids FROM humain WHERE id_humain = ?), (SELECT signe_distinctif FROM humain WHERE id_humain = ?), (SELECT empreinte FROM humain WHERE id_humain = ?), (SELECT casier FROM humain WHERE id_humain = ?), (SELECT nombre_condamnation FROM humain WHERE id_humain = ?), (SELECT type_condamnation FROM humain WHERE id_humain = ?), (SELECT nationalite FROM humain WHERE id_humain = ?), (SELECT status_id FROM personne_impliquee WHERE humain_id = ?)) ; DELETE FROM personne_impliquee WHERE humain_id = ? ; DELETE FROM humain WHERE id_humain = ?; COMMIT ; ";
+//			
+//			pstmt = datasource.getConnection().prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
+//			
+//			for (int j=1 ; j<25 ; j++) {
+//				pstmt.setInt(++i, id);
+//			}
+//			
+//			logSQL(pstmt);
+//			System.out.println(sql);
+//			pstmt.executeUpdate();
+//			}catch (SQLException e) {
+//				e.printStackTrace();
+//				log.error("SQL Error !:" + pstmt.toString(), e);
+//				throw e;
+//			} finally {
+//				pstmt.close();
+//				connection.close();
+//			}
+//	
+//
+//	}
+	
+	@Override
+	public void archiverSuspect(int id) throws Exception{
+		PreparedStatement pstmt = null;
+		int i =0;
+		try {
+			String sql = "INSERT INTO archive_personne_impliquee (id_archive_personne_impliquee, nom , prenom , date_naissance , genre , photo , date_deces , adresse , grade , competences , date_prise_service , actif , telephone , taille , poids , signe_distinctif , empreinte , casier , nombre_condamnation , type_condamnation , nationalite , statut )  VALUES ((SELECT id_humain FROM humain WHERE id_humain = ?), (SELECT nom FROM humain WHERE id_humain = ?), (SELECT prenom FROM humain WHERE id_humain = ?), (SELECT date_naissance FROM humain WHERE id_humain = ?), (SELECT genre FROM humain WHERE id_humain = ?), (SELECT photo FROM humain WHERE id_humain = ?), (SELECT date_deces FROM humain WHERE id_humain = ?), (SELECT adresse FROM humain WHERE id_humain = ?), (SELECT grade FROM humain WHERE id_humain = ?), (SELECT competences FROM humain WHERE id_humain = ?),  (SELECT date_prise_service FROM humain WHERE id_humain = ?), (SELECT actif FROM humain WHERE id_humain = ?), (SELECT telephone FROM humain WHERE id_humain = ?), (SELECT taille FROM humain WHERE id_humain = ?), (SELECT poids FROM humain WHERE id_humain = ?), (SELECT signe_distinctif FROM humain WHERE id_humain = ?), (SELECT empreinte FROM humain WHERE id_humain = ?), (SELECT casier FROM humain WHERE id_humain = ?), (SELECT nombre_condamnation FROM humain WHERE id_humain = ?), (SELECT type_condamnation FROM humain WHERE id_humain = ?), (SELECT nationalite FROM humain WHERE id_humain = ?), (SELECT status_id FROM personne_impliquee WHERE humain_id = ?)) ;";
+			
+			pstmt = datasource.getConnection().prepareStatement(sql,PreparedStatement.RETURN_GENERATED_KEYS);
+			for (int j=1 ; j<23 ; j++) {
+				pstmt.setInt(++i, id);
+			}
+				
+				logSQL(pstmt);
+				pstmt.executeUpdate();
+			} catch (SQLException e) {
+				e.printStackTrace();
+				log.error("SQL Error !:" + pstmt.toString(), e);
+				throw e;
+			} finally {
+				pstmt.close();
+			}
+			
+		
+	}
+
+	@Override
+	public void supprimerJointureSuspect(int id) throws Exception {
+		PreparedStatement pstmt = null;
+		try {
+			String sql = "DELETE FROM personne_impliquee WHERE humain_id = ?";
+			pstmt = datasource.getConnection().prepareStatement(sql);
+			pstmt.setInt(1, id);
+			
+			logSQL(pstmt);
+			
+			// Run the the update query
+			pstmt.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			log.error("SQL Error !:" + pstmt.toString(), e);
+			throw e;
+		} finally {
+			pstmt.close();
+		}
+			
+		}
+	
+
+	@Override
+	public void supprimerSuspect(int id) throws Exception {
+		
+		PreparedStatement pstmt = null;
+		try {
+			String sql = "DELETE FROM humain where id_humain = ?";
+			pstmt = datasource.getConnection().prepareStatement(sql);
+			pstmt.setInt(1, id);
+			
+			logSQL(pstmt);
+			
+			// Run the the update query
+			int result = pstmt.executeUpdate();
+			if(result != 1)
+				throw new Exception("Suspect non trouvé");
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			log.error("SQL Error !:" + pstmt.toString(), e);
+			throw e;
+		} finally {
+			
+			pstmt.close();
+		}
+			
+		}
+	}
+
+
+
+

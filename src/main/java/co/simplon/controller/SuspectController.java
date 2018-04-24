@@ -118,6 +118,18 @@ public class SuspectController {
 			return  ResponseEntity.status(HttpStatus.CREATED).body(result);
 			
 		}
-		
 
+		@RequestMapping(value="/archiverSuspect/{id}", method = RequestMethod.DELETE)
+		public ResponseEntity<?> archiverSuspect(@PathVariable int id ) {
+			try {
+				suspectService.archiverSuspect(id);
+				suspectService.supprimerJointureSuspect(id);
+				suspectService.supprimerSuspect(id);
+			}catch (Exception e) {
+				return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+			}
+			
+			return ResponseEntity.status(HttpStatus.OK).body(null);
+		
+        }
 }
