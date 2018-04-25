@@ -28,8 +28,10 @@ INSERT INTO `humain` VALUES (1,'Toto','Tutu','1989-07-26','M',NULL,NULL,'1 rue d
 (18,'Kain','Horatio','1976-05-23','M',NULL,NULL,NULL,'Lieutenant','gestion d\'équipe','2001-07-26','',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
 (19,'De La Fuente','Diego','1986-06-27','M',NULL,NULL,NULL,'Detective','ballistique','2009-09-12',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
 
--- script d'insertion de données dans la table de jointure
-INSERT INTO `personne_impliquee` VALUES (5,5,5,2),(32,16,5,2),(39,18,6,1),(40,19,7,1);
 
 -- script d'insertion de données dans la table des codes de statut
 INSERT INTO `status` VALUES (1,'agent'),(2,'suspect'),(3,'victime'),(4,'temoin');
+
+-- script d'insertion de données dans la table de jointure
+INSERT INTO `personne_impliquee` VALUES (5,5,5,2),(32,16,5,2),(39,18,6,1),(40,19,7,1);
+
