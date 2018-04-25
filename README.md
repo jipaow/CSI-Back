@@ -27,10 +27,11 @@ server.port: XXXX
 ### Lancement
 
 #### Back
+Dans un repertoire de votre choix ouvrir `GitBash` et entrer la commande `git clone https://github.com/jipaow/CSI-Back.git`.
 
 # GENERATION DU FICHIER Csiback-0.0.1-SNAPSHOT.jar
- pour génerer le fichier .jar executable sur une autre machine :
- - se placer dans le dossier du projet (CSI-Back/CSI-Back) 
+ pour génerer le fichier .jar executable :
+ - se placer dans le repertoire du projet (CSI-Back/CSI-Back) 
  - ouvrir un invité de commande à cet emplacement
  - taper la commande `mvn package` ( si le serveur du projet est lancé) ou `mvn pacakge -DskipTests` (si le serveur du projet n'est pas lancé le build ne se fera pas)
  -le fichier Csiback-0.0.1-SNAPSHOT.jar est génerer dans le dossier target
@@ -107,15 +108,19 @@ server.port: XXXX
 
 ### BASE DE DONNEE
 La modelisation et la conception de la base de donnée ont été realisé avec  le SGBDR (Système de Gestion de Bases de Données Relationnelles) MySql.
-SGBDR : En informatique, un système de gestion de base de données (abr. SGBD) est un logiciel système destiné à stocker et à partager des informations dans une base de données, en garantissant la qualité, la pérennité et la confidentialité des informations, tout en cachant la complexité des opérations.
+`SGBDR` : En informatique, un système de gestion de base de données (abr. SGBD) est un logiciel système destiné à stocker et à partager des informations dans une base de données, en garantissant la qualité, la pérennité et la confidentialité des informations, tout en cachant la complexité des opérations.
 
 ### SCHEMA SQL
 Document/schemaDB.png
 ![](Document/schemaDB.png)
 
 ### SCRIPTS SQL
-- Document/filRougeSchemaDB.mwb
-- Rappel : Pour l’obtention des données, le fichier “requetesInsertionDonnées.sql” est nécessaire et bien présent dans le projet (/Fil_Rouge/src/main/resources/data.sql)
+- Document/`filRougeSchemaDB3.mwb`
+- Rappel : Pour génerer un jeux de données, le fichier `requetesInsertionDonnées.sql` est nécessaire et bien présent dans le projet (/Fil_Rouge/src/main/resources/data.sql) :
+-> Génération d'enquetes.
+-> Génération d'agents , de suspects .
+-> Génération des codes des statuts ( agent , temoin , suspect ..)
+-> Génération d'archive d'enquêtes.
 
 
 
