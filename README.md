@@ -7,7 +7,7 @@ A l'attention du client
 ### Prérequis (Back)
 - Java 1,8
 - Maven (+ commandes exécuter/déployer)
-
+- Git
 - SGBDR MySQL
 - filRougeSchemaDB.mwb ( genere le schema workbench de la base de données)
 - scriptDatabase.sql
@@ -27,21 +27,15 @@ server.port: XXXX
 ### Lancement
 
 #### Back
-Via GitHub :
-1. Cloner le repository
-2. Ajouter le projet à votre IDE 
-3. Faire un ```MVN Clean Install```
-4. Faire un Maven Update Project
-5. Lancer l’application via : Run as Spring Boot App
 
-### GENERATION DU FICHIER Csiback-0.0.1-SNAPSHOT.jar
+# GENERATION DU FICHIER Csiback-0.0.1-SNAPSHOT.jar
  pour génerer le fichier .jar executable sur une autre machine :
- - on se place dans le dossier du projet (CSI-Back/CSI-Back) 
- - on ouvre un invité de commande à cet emplacement
- -on tape la commande mvn package ( si le serveur du projet est lancé) ou mvn pacakge -DskipTests (si le serveur du projet n'est pas lancé le build ne se fera pas)
+ - se placer dans le dossier du projet (CSI-Back/CSI-Back) 
+ - ouvrir un invité de commande à cet emplacement
+ - taper la commande `mvn package` ( si le serveur du projet est lancé) ou `mvn pacakge -DskipTests` (si le serveur du projet n'est pas lancé le build ne se fera pas)
  -le fichier Csiback-0.0.1-SNAPSHOT.jar est génerer dans le dossier target
 
-Via le fichier jar:
+# LANCEMENT DU SERVEUR
 1. Ouvrir une invite de commande dans le dossier contenant le fichier jar ( le dossier target )
 2. Entrer : ```java -jar Csiback-0.0.1-SNAPSHOT.jar```
 
@@ -110,6 +104,10 @@ Via le fichier jar:
 - FICHE SUSPECT
 
 ![](Document/Mockup/Detail_5.png)
+
+### BASE DE DONNEE
+La modelisation et la conception de la base de donnée ont été realisé avec  le SGBDR (Système de Gestion de Bases de Données Relationnelles) MySql.
+SGBDR : En informatique, un système de gestion de base de données (abr. SGBD) est un logiciel système destiné à stocker et à partager des informations dans une base de données, en garantissant la qualité, la pérennité et la confidentialité des informations, tout en cachant la complexité des opérations.
 
 ### SCHEMA SQL
 Document/schemaDB.png
