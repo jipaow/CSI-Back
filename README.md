@@ -116,6 +116,7 @@ Document/schemaDB.png
 
 ### SCRIPTS SQL
 - Document/`filRougeSchemaDB3.mwb`
+- Document/`scriptDataBaseCsi.sql`
 - Rappel : Pour génerer un jeux de données, le fichier `requetesInsertionDonnées.sql` est nécessaire et bien présent dans le projet (/Fil_Rouge/src/main/resources/data.sql) :
 -> Génération d'enquetes.
 -> Génération d'agents , de suspects .
