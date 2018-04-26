@@ -103,12 +103,11 @@ public class AgentController {
       
   }		
 	
+	// map storage agent
 	@RequestMapping(value="/archiverAgent/{id}", method = RequestMethod.DELETE)
 	public ResponseEntity<?> archiverSuspect(@PathVariable int id ) {
 		try {
 			agentService.archiverAgent(id);
-			agentService.supprimerJointureAgent(id);
-			agentService.suprrimerAgent(id);
 		}catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
 		}

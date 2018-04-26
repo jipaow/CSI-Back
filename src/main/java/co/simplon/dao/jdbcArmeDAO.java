@@ -13,6 +13,9 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import co.simplon.model.Arme;
 import co.simplon.model.DataArme;
+/**
+ * Fonctionnalité à implementer pour une V2
+ * */
 
 @Repository
 public class jdbcArmeDAO implements ArmeDAO {

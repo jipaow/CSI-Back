@@ -12,7 +12,11 @@ import org.springframework.web.multipart.MultipartFile;
 
 
 import co.simplon.service.StorageService;
-
+/**
+ * 
+ * @author Utilisateur
+ * Fonctionnalité à implémenter pour ue V2
+ */
 @RestController
 public class UploadController {
 	

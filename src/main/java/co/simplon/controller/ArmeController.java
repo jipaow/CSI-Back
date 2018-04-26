@@ -11,7 +11,12 @@ import org.springframework.web.bind.annotation.RestController;
 import co.simplon.model.DataArme;
 import co.simplon.service.ArmeService;
 
-
+/**
+ * 
+ * @author Utilisateur
+ * Controller arme à finir pour V2
+ * Controller Vehicule à crer pour V2
+ */
 @CrossOrigin(origins="http://localhost:4200")
 @RestController
 @RequestMapping("/csi")

@@ -18,7 +18,7 @@ import co.simplon.service.EnqueteService;
  * 
  * @author Robin
  *	Cette classe liste les URI et les traitements associés qui devront être appelées par le front pour pouvoir utiliser les fonctionnalités 
- *du back 
+ *  du back 
  */
 @CrossOrigin(origins="http://localhost:4200")
 @RestController
@@ -99,8 +99,6 @@ public class EnqueteController {
 	public ResponseEntity<?> archiverEnquete(@PathVariable int id){
 		try {
 			enqueteService.archiverEnquete(id);
-			enqueteService.supprimerJointureEnquete(id);
-			enqueteService.supprimerEnquete(id);
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
 		}

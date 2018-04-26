@@ -19,12 +19,9 @@ public interface EnqueteDAO {
 	
 	public Enquete addSuspectToEnquete (Enquete enquete) throws Exception;
 	
-	public Enquete archiverEnquete (int id) throws Exception;
+	public Enquete getEnqueteForArchiver(int id) throws Exception;
 	
-	public void supprimerJointureEnquete (int id) throws Exception;
+	public void archiverEnquete (Enquete enquete) throws Exception;
 	
-	public void supprimerEnquete (int id) throws Exception;
-	
-	//public DataEnquete getArmeFromEnquete(int id) throws Exception;
 
 }

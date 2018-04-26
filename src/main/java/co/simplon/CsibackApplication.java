@@ -9,6 +9,5 @@ public class CsibackApplication {
 	public static void main(String[] args) {
 		
 		SpringApplication.run(CsibackApplication.class, args);
-		
 	}
 }
