@@ -64,23 +64,8 @@ public class AgentService {
 	}
 	
 	public void archiverAgent (int id) throws Exception {
-		dao.archiverAgent(id);
+		Agent agent = dao.getAgentForArchivage(id);
+		dao.archiverAgent(agent);
 	}
 	
-	public void supprimerJointureAgent (int id) throws Exception {
-		dao.supprimerJointureAgent(id);
-	}
-	
-	public void suprrimerAgent (int id) throws Exception {
-		dao.supprimerAgent(id);
-	}
-
-	
-	
-	
-	
-	
-	
-	
-
 }

@@ -3,8 +3,6 @@ package co.simplon.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
 import co.simplon.dao.EnqueteDAO;
 import co.simplon.model.DataEnquete;
 import co.simplon.model.Enquete;
@@ -74,29 +72,9 @@ public class EnqueteService {
 	 * @return enquete
 	 * @throws Exception
 	 */
-	
-	
-	public Enquete archiverEnquete (int id) throws Exception {
-		return dao.archiverEnquete(id);
+	public void archiverEnquete (int id) throws Exception {
+		Enquete enquete = dao.getEnqueteForArchiver(id);
+	    dao.archiverEnquete(enquete);
 	}
 	
-	/**
-	 * Permet de supprimer les informations liées à l'enquête que l'on veut supprimer dans la table personne impliquées 
-	 * Cette fonction est toujours à utiliser avant d'utiliser la fonction supprimerEnquete() 
-	 * @param id
-	 * @throws Exception
-	 */
-	public void supprimerJointureEnquete (int id) throws Exception {
-		dao.supprimerJointureEnquete(id);
-	}
-	
-	/**
-	 * Permet de supprimer une enquête et ses informations de la table enquête
-	 * La fonction supprimerJointureEnquete() doit être utilisée avant la fonction supprimerEnquete()
-	 * @param id
-	 * @throws Exception
-	 */
-	public void supprimerEnquete (int id) throws Exception {
-		dao.supprimerEnquete(id);
-	}
 }

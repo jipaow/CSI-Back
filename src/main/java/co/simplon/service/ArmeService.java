@@ -6,7 +6,11 @@ import org.springframework.stereotype.Service;
 import co.simplon.dao.ArmeDAO;
 import co.simplon.model.Arme;
 import co.simplon.model.DataArme;
-
+/**
+ * fonctionnalité à implementer dans une V2
+ * @author Utilisateur
+ *
+ */
 @Service
 public class ArmeService {
 	

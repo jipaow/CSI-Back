@@ -5,14 +5,14 @@ import java.util.List;
 /**
  * 
  * @author jean philippe
- * cette classe permet de typer les objets json et les arraylist envoyées au front
+ * Cette classe permet de typer les objets json et les arraylist envoyées au front
+ * Modele pour la vue.
  *
  */
 public class DataSuspect {
 	private String type = "suspect";
+	
 	private List <Suspect> data = new ArrayList<>();
-	
-	
 	
 	public DataSuspect() {
 		super();

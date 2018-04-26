@@ -2,7 +2,11 @@ package co.simplon.dao;
 
 import co.simplon.model.Arme;
 import co.simplon.model.DataArme;
-
+/***
+ * Fonctionalité à implementer dans une V2
+ * @author Utilisateur
+ *
+ */
 public interface ArmeDAO {
 
 	public DataArme listArme() throws Exception;

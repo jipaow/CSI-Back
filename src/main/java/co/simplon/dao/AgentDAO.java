@@ -22,9 +22,8 @@ public interface AgentDAO {
     
 	public int verifAgentExiste(Agent agent) throws Exception;
 	
-	public void archiverAgent(int id) throws Exception;
+	public Agent getAgentForArchivage (int id) throws Exception;
 	
-	public void supprimerJointureAgent (int id) throws Exception;
+	public void archiverAgent(Agent agent) throws Exception;
 	
-	public void supprimerAgent (int id) throws Exception; 
 }

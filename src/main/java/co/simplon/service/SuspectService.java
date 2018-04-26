@@ -2,8 +2,6 @@ package co.simplon.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
 import co.simplon.dao.SuspectDAO;
 import co.simplon.model.DataSuspect;
 import co.simplon.model.Suspect;
@@ -21,6 +19,8 @@ public class SuspectService {
 	
 	@Autowired
 	private SuspectDAO dao;
+	
+	
 	
 	/**
 	 *  recupere toutes les lignes de la table humain avec un statut suspect (cf addSuspectToEnquete) et les insert dans une list<suspect>
@@ -77,25 +77,15 @@ public class SuspectService {
 	
 	/**
 	 * Archive une personne impliquée en tant que suspect de la liste des suspects et l'ajoute à la table archive_suspect
+	 * recupère un objet Suspect par son id (getSuspectArchivage) pour le passer en parametre de la methode archiverSuspect qui try
+	 * une transaction manuelle.
 	 * @param id
 	 * @throws Exception
-	 */
-	@Transactional
-	public void archiverSuspect (int id) throws Exception {
-			dao.archiverSuspect(id);
-			dao.supprimerJointureSuspect(id);
-			dao.supprimerSuspect(id);
-			
+	 */	
+	public void archiverSuspect ( int id ) throws Exception {
+		Suspect suspect = dao.getSuspectForArchivage(id);
+		dao.archiverSuspect(suspect);
 	}
-	
-//	public void supprimerJointureSuspect (int  id) throws Exception{
-//		dao.supprimerJointureSuspect(id);
-//	}
-//	
-//	public void supprimerSuspect (int id) throws Exception{
-//		dao.supprimerSuspect(id);
-//	}
-	
 	
 	
 
