@@ -8,7 +8,7 @@ INSERT INTO `enquete` VALUES (5,'Le décompte final','Fraude','2018-03-07','Pari
 (11,'testo','Vol','2018-03-15','France','En cours',0);
 
 -- script d'insertion de données d'enquêtes archivées 
-INSERT INTO `enquete_old` VALUES (1,'Halloween','Homicide','2018-03-21','Montreuil',NULL,0),
+INSERT INTO `archive_enquete` VALUES (1,'Halloween','Homicide','2018-03-21','Montreuil',NULL,0),
 (2,'La blague de trop','Harcelement','2017-10-02','Montreuil','Resolue',1),
 (3,'Les Noces Pourpres ','Homicide','1989-12-21','Les Jumeaux','Résolue',1),
 (4,'Le Test ','Homicide','1989-12-21','Les Jumeaux','Résolue',1);
