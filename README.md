@@ -97,7 +97,7 @@ Dans un repertoire de votre choix ouvrir `GitBash` et entrer la commande `git cl
 
 ### DIAGRAMME DE CLASSES
 
-![](Document/diagramme_de_classe.png)
+![](Document/diagramme_des_classes.png)
 
 ### ENCHAINEMENT DES ECRANS MOCKUP
 
