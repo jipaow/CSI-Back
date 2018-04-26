@@ -99,6 +99,24 @@ Dans un repertoire de votre choix ouvrir `GitBash` et entrer la commande `git cl
 
 ![](Document/diagramme_de_classe.png)
 
+### ENCHAINEMENT DES ECRANS MOCKUP
+
+Pour consulter le diagramme d'enchainnement des ecrans cliquer sur le lien suivant et suivez la procedure d'ecrite ci-dessous.
+(Nous vous avons creer l'adresse mail suivante pour un accès gratuit simplonformarox@gmail.com)
+
+https://projects.invisionapp.com/freehand/document/uuNu8kZUh
+
+- ![](Document/connection_invision.png)
+
+-![](Document/creer_compte_invision.png)
+
+
+Pour consulter l'echainement interactif cliquer simplement sur ce lien (pas d'etape d'inscription necessaire).
+
+https://invis.io/NHHBG545A2Z#/279006862_Home
+
+
+
 ### MOCKUPS
 
 - PAGE DE CONNEXION
@@ -122,9 +140,6 @@ Dans un repertoire de votre choix ouvrir `GitBash` et entrer la commande `git cl
 ![](Document/Mockup/Detail_5.png)
 
 
-
-
-
 ____________________________________________________________________________________________________________________________________________
 @Author jean-philippe:
 
@@ -136,6 +151,7 @@ la base de donnée.
                            jdbcSuspectDAO.java Classe qui implémente les methodes de SuspectDAO.java utilise le preparedStatement pour executer les requtes sql (les instances de PreparedStatement contiennent des instructions sql déjà compilées qui améliore notement les preformances, les instructions sql contiennent un ou plusieurs paramètres d'entée) afin de communiquer avec le base de donnée.
 - Package co.simplon.service : SuspectService.java Classe qui expose au Controller les méthodes permettant de faire le lien entre 
 la couche DAO et le ce dernier.
+- Packege co.simplon.service : Suspectservice.java Classe contenant lalogique metier qui fait le lien entre la couche dao et le controller.
 - Package co.simplon.controller: SuspectController.java permet le mapping des requetes url, classe permettant l'interaction entre le client et le server en traitant les actions de l'utilisateur, modifie les données du modèle et de la vue.
 - Package co.simplon.tests ( dans le dossier src/test/java ):  SuspectControllerTest.java teste les methodes getAllSuspect()
 et get SuspectbyId() service/controller.
