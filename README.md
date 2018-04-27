@@ -9,7 +9,7 @@ Depuis la partie `Recherche` l'utilisateur peut rechercher une liste d'affaire (
 une liste de suspect (Fetch Suspect List) ou une liste d'utilisateurs (Fetch User list).
 Depuis un des tableaux qui s'affiche l'utilisateur peut consulter une fiche détaillée (`Acceder`).
 Depuis la fiche `Detail` l'utilisateur peut mettre à jour ou completer les informations via l'icone editer ( en forme de crayon ) ou archiver une fiche (`Archiver`).
-Depuis la partie `Administration` l'utilisateur peut creer ou mettre à jour une fiche suspect, utilisateur ou enquete.
+Depuis la partie `Administration` l'utilisateur peut creer ou mettre à jour une fiche suspect, utilisateur ou enquete.Afin de valider et de pouvoir rechercher un suspect il faut au préalable l'assigner à une affaire.
 
 ## MODE OPÉRATOIRE
 
